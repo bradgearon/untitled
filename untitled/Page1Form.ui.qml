@@ -9,10 +9,8 @@ Item {
     property alias close: close
 
     Flickable {
-        anchors.bottom: frame1.top
-        anchors.right: parent.right
-        anchors.left: parent.left
-        anchors.top: parent.top
+        width: frame1.width
+        height: frame1.height
         id: flick
         TextArea.flickable: textArea1
         boundsBehavior: Flickable.StopAtBounds
@@ -27,7 +25,30 @@ Item {
             textFormat: Text.AutoText
             wrapMode: Text.Wrap
             font.pixelSize: 18
+            text: "This \n is\n some\n text"
             readOnly: true
+
+
+        }
+    }
+
+    Pane {
+        id: frame1
+        y: parent.height * .5
+        height: parent.height - parent.height * .5
+        bottomPadding: 0
+        rightPadding: 0
+        leftPadding: 0
+        topPadding: 0
+        width: parent.width
+        padding: 14
+
+        Image {
+            id: image1
+            clip: true
+            anchors.fill: parent
+            source: "1Jn-4-1.jpg"
+            fillMode: Image.PreserveAspectFit
         }
     }
 
@@ -45,21 +66,6 @@ Item {
         font.pixelSize: (height * .5)
     }
 
-    Pane {
-        id: frame1
-        y: parent.height * .5
-        height: parent.height - parent.height * .5
-        width: parent.width
-        padding: 3.5
-
-        Image {
-            id: image1
-            anchors.fill: parent
-            source: "1Jn-4-1.jpg"
-            fillMode: Image.PreserveAspectFit
-        }
-    }
-
     Button {
         id: learnMore
         height: 49
@@ -75,5 +81,25 @@ Item {
         rightPadding: 21
         leftPadding: 21
         topPadding: 14
+    }
+
+    states: State {
+        name: "horizontal"
+        when: page1.width > page1.height
+
+        PropertyChanges {
+            target: frame1
+            x: parent.width * .5
+            y: 0
+            width: parent.width / 2
+            height: parent.height
+        }
+
+        PropertyChanges {
+            target: flick
+            width: parent.width / 2
+            height: parent.height
+        }
+
     }
 }

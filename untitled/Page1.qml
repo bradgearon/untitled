@@ -3,6 +3,7 @@ import QtQuick 2.7
 Page1Form {
     id: page1
     property var model
+
     onModelChanged: function() {
         if(!model) {
             return;
@@ -12,7 +13,8 @@ Page1Form {
     }
 
     flickable.onContentYChanged: function() {
-        if(!model) {
+        if(!model || width > height) {
+            close.opacity = 1;
             return;
         }
 
