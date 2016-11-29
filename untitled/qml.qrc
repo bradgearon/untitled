@@ -4,7 +4,33 @@
         <file>Page1.qml</file>
         <file>Page1Form.ui.qml</file>
         <file>test.json</file>
-        <file>1Jn-4-1.jpg</file>
-        <file>Gen-1-1.jpg</file>
+        <file>images/1Jn-4-1.jpg</file>
+        <file>images/1Jn-4-7.jpg</file>
+        <file>images/Acts-2-1.jpg</file>
+        <file>images/Ex-14-10.jpg</file>
+        <file>images/Gen-1-1.jpg</file>
+        <file>images/Gen-6-9.jpg</file>
+        <file>images/John-10-1.jpg</file>
+        <file>images/John-14-1.jpg</file>
+        <file>images/John-14-15.jpg</file>
+        <file>images/John-15-1.jpg</file>
+        <file>images/John-3-16.jpg</file>
+        <file>images/John-6-35.jpg</file>
+        <file>images/Luk-2-8.jpg</file>
+        <file>images/Mat-10-26.jpg</file>
+        <file>images/Mat-14-14.jpg</file>
+        <file>images/Mat-14-22.jpg</file>
+        <file>images/Mat-17-1.jpg</file>
+        <file>images/Mat-19-13.jpg</file>
+        <file>images/Mat-19-16.jpg</file>
+        <file>images/Mat-3-13.jpg</file>
+        <file>images/Mat-6-19.jpg</file>
+        <file>images/Mat-6-25.jpg</file>
+        <file>images/Mat-6-5.jpg</file>
+        <file>images/Mk-11-20.jpg</file>
+        <file>images/Mk-4-35.jpg</file>
+        <file>images/Ps-107-1.jpg</file>
+        <file>images/Rom-8-31.jpg</file>
+        <file>level.json</file>
     </qresource>
 </RCC>

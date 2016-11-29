@@ -7,28 +7,33 @@ Item {
     property alias flickable: flick
     property alias textArea: textArea1
     property alias close: close
+    property alias closeTimer: timer
 
-    Flickable {
+    Pane {
+        id: leftPane
         width: frame1.width
         height: frame1.height
-        id: flick
-        TextArea.flickable: textArea1
-        boundsBehavior: Flickable.StopAtBounds
-        ScrollBar.vertical: ScrollBar {
-        }
+        z: 100
+        padding: 0
 
-        TextArea {
-            id: textArea1
-            width: parent.width
-            height: parent.height
-            padding: 14
-            textFormat: Text.AutoText
-            wrapMode: Text.Wrap
-            font.pixelSize: 18
-            text: "This \n is\n some\n text"
-            readOnly: true
-
-
+        Flickable {
+            anchors.fill: parent
+            id: flick
+            TextArea.flickable: textArea1
+            boundsBehavior: Flickable.StopAtBounds
+            ScrollBar.vertical: ScrollBar {
+            }
+            TextArea {
+                z: 100
+                id: textArea1
+                padding: 12
+                textFormat: Text.AutoText
+                wrapMode: Text.Wrap
+                font.pixelSize: 18
+                text: "This \n is\n some\n text"
+                anchors.fill: parent
+                readOnly: true
+            }
         }
     }
 
@@ -36,19 +41,110 @@ Item {
         id: frame1
         y: parent.height * .5
         height: parent.height - parent.height * .5
-        bottomPadding: 0
-        rightPadding: 0
-        leftPadding: 0
-        topPadding: 0
         width: parent.width
-        padding: 14
+        padding: 0
 
-        Image {
-            id: image1
-            clip: true
+        ListView {
+            id: listView1
+            snapMode: ListView.SnapOneItem
+            orientation: ListView.Horizontal
             anchors.fill: parent
-            source: "1Jn-4-1.jpg"
-            fillMode: Image.PreserveAspectFit
+            contentHeight: parent.height
+            contentWidth: parent.width
+            flickableDirection: Flickable.AutoFlickDirection
+
+            delegate: Image {
+                z: 80
+                id: image1
+                width: frame1.width
+                height: frame1.height
+                source: image
+                fillMode: Image.PreserveAspectCrop
+            }
+
+            model: ListModel {
+                ListElement {
+                    image: "images/1Jn-4-1.jpg"
+                }
+                ListElement {
+                    image: "images/1Jn-4-7.jpg"
+                }
+                ListElement {
+                    image: "images/Acts-2-1.jpg"
+                }
+                ListElement {
+                    image: "images/Ex-14-10.jpg"
+                }
+                ListElement {
+                    image: "images/Gen-1-1.jpg"
+                }
+                ListElement {
+                    image: "images/Gen-6-9.jpg"
+                }
+                ListElement {
+                    image: "images/John-10-1.jpg"
+                }
+                ListElement {
+                    image: "images/John-14-1.jpg"
+                }
+                ListElement {
+                    image: "images/John-14-15.jpg"
+                }
+                ListElement {
+                    image: "images/John-15-1.jpg"
+                }
+                ListElement {
+                    image: "images/John-3-16.jpg"
+                }
+                ListElement {
+                    image: "images/John-6-35.jpg"
+                }
+                ListElement {
+                    image: "images/Luk-2-8.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-10-26.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-14-14.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-14-22.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-17-1.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-19-13.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-19-16.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-3-13.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-6-19.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-6-25.jpg"
+                }
+                ListElement {
+                    image: "images/Mat-6-5.jpg"
+                }
+                ListElement {
+                    image: "images/Mk-11-20.jpg"
+                }
+                ListElement {
+                    image: "images/Mk-4-35.jpg"
+                }
+                ListElement {
+                    image: "images/Ps-107-1.jpg"
+                }
+                ListElement {
+                    image: "images/Rom-8-31.jpg"
+                }
+            }
         }
     }
 
@@ -57,19 +153,32 @@ Item {
         width: 35
         height: 35
 
+        visible: false
         anchors.top: parent.top
         anchors.topMargin: 8
         anchors.right: parent.right
         anchors.rightMargin: 8
 
         text: qsTr("X")
+        z: 100
+        font.pixelSize: (height * .5)
+    }
+
+    Text {
+        id: timer
+        anchors.fill: close
+        text: '5'
+        verticalAlignment: Text.AlignVCenter
+        horizontalAlignment: Text.AlignHCenter
+
+        z: 100
         font.pixelSize: (height * .5)
     }
 
     Button {
         id: learnMore
         height: 49
-
+        z: 110
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 7
         anchors.right: parent.right
@@ -91,15 +200,14 @@ Item {
             target: frame1
             x: parent.width * .5
             y: 0
-            width: parent.width / 2
+            width: parent.width * .5
             height: parent.height
         }
 
         PropertyChanges {
-            target: flick
-            width: parent.width / 2
+            target: leftPane
+            width: frame1.x
             height: parent.height
         }
-
     }
 }

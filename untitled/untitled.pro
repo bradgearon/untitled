@@ -3,7 +3,9 @@ QT += qml quick
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    bookmodel.cpp
+    bookmodel.cpp \
+    levelpicker.cpp \
+    level.cpp
 
 RESOURCES += qml.qrc
 
@@ -16,4 +18,8 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 HEADERS += \
-    bookmodel.h
+    bookmodel.h \
+    levelpicker.h \
+    level.h
+
+DISTFILES +=

@@ -3,18 +3,49 @@ import QtQuick 2.7
 Page1Form {
     id: page1
     property var model
+    property int timerTotal: 5
+    property int timerCurrent: 0
+
+    Timer {
+        id: timer
+        running: false
+        repeat: true
+        onTriggered: function() {
+            if(timerCurrent++ < timerTotal) {
+                closeTimer.text = timerTotal - timerCurrent + '';
+                return;
+            }
+
+            running = false;
+            close.visible = true;
+            closeTimer.visible = false;
+        }
+    }
 
     onModelChanged: function() {
         if(!model) {
             return;
         }
 
+        timer.start();
         verse = model.verse;
+    }
+
+    close.onClicked: function() {
+        main.close();
+    }
+
+    onWidthChanged: function() {
+        if(width > height) {
+            close.opacity = 1;
+            closeTimer.opacity = 1;
+        }
     }
 
     flickable.onContentYChanged: function() {
         if(!model || width > height) {
             close.opacity = 1;
+            closeTimer.opacity = 1;
             return;
         }
 
@@ -37,8 +68,10 @@ Page1Form {
 
         var isInButton = touching;
         if(isInButton) {
-            close.opacity = .15;
+            closeTimer.opacity = .25;
+            close.opacity = .25;
         } else {
+            closeTimer.opacity = 1;
             close.opacity = 1;
         }
 

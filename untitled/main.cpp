@@ -4,6 +4,9 @@
 #include <QWindow>
 #include <QJsonDocument>
 #include <QFile>
+#include <QDesktopServices>
+#include <QDebug>
+#include "levelpicker.h"
 
 int main(int argc, char *argv[])
 {
@@ -19,12 +22,28 @@ int main(int argc, char *argv[])
     testJson.open(QFile::ReadOnly);
     auto json = QJsonDocument::fromJson(testJson.readAll());
     testJson.close();
+    auto model = json.toVariant();
+
+    QFile levelJson(":/level.json");
+    levelJson.open(QFile::ReadOnly);
+    json = QJsonDocument::fromJson(levelJson.readAll());
+    levelJson.close();
+    LevelPicker picker(json.array());
+
+    for(auto level: picker.getLevels()) {
+        qDebug() << "level: " << level->getRank();
+    }
 
     QWindow *root = qobject_cast<QWindow *>(
                 engine.rootObjects().first());
 
+    root->setProperty("model",  model);
 
-    root->setProperty("model",  json.toVariant());
+    // pick an element:
+    // pick a level
+    //
+
+
 
     return app.exec();
 }
