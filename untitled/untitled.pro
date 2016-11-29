@@ -5,7 +5,8 @@ CONFIG += c++11
 SOURCES += main.cpp \
     bookmodel.cpp \
     levelpicker.cpp \
-    level.cpp
+    level.cpp \
+    score.cpp
 
 RESOURCES += qml.qrc
 
@@ -20,6 +21,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 HEADERS += \
     bookmodel.h \
     levelpicker.h \
-    level.h
+    level.h \
+    score.h
 
 DISTFILES +=
