@@ -4,15 +4,24 @@
 namespace untitled {
 class LevelPicker
 {
-private:
+protected:
     std::vector<Level *> levels;
     std::map<QString, Score *> scoreMap;
+    std::vector<Score *> scores;
+
+private:
+    std::default_random_engine gen;
+    std::piecewise_constant_distribution<> random;
+
+    bool rebuild = true;
+
     void setLevelsAndScores(QJsonArray json);
+    void rebuildRandom();
 
 public:
     LevelPicker (QJsonArray levels);
     void setRead(QString element, double read);
-    QString pick();
+    Score* pick();
     Score* getScore(QString element);
 
 

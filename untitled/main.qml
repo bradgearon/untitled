@@ -3,9 +3,8 @@ import QtQuick.Controls 2.0
 import QtQuick.Layouts 1.0
 
 ApplicationWindow {
-    visible: true
-    title: qsTr("Hello World")
     id: main
+    visible: true
     property var model
 
     Page1 {

@@ -1,6 +1,18 @@
-QT += qml quick
-
+QT += qml quick sql
 CONFIG += c++11
+# qtc_runnable
+
+#build_pass:CONFIG(debug, debug) {
+#  copydata.commands = $(COPY_DIR) $$system_path($$PWD/app_webview) \
+#      $$system_path($$OUT_PWD/app_webview)
+#  first.depends = $(first) copydata
+#  export(first.depends)
+#  export(copydata.commands)
+
+#  QMAKE_EXTRA_TARGETS += first copydata
+#}
+
+RESOURCES += qml.qrc
 
 SOURCES += main.cpp \
     bookmodel.cpp \
@@ -8,21 +20,9 @@ SOURCES += main.cpp \
     level.cpp \
     score.cpp
 
-RESOURCES += qml.qrc
-
-# Additional import path used to resolve QML modules in Qt Creator's code model
-QML_IMPORT_PATH =
-
-# Default rules for deployment.
-qnx: target.path = /tmp/$${TARGET}/bin
-else: unix:!android: target.path = /opt/$${TARGET}/bin
-!isEmpty(target.path): INSTALLS += target
-
 HEADERS += \
     bookmodel.h \
     levelpicker.h \
     level.h \
     score.h \
     models.h
-
-DISTFILES +=

@@ -1,5 +1,7 @@
 #pragma once
 
+#include <chrono>
+
 #include <QObject>
 #include <QJsonObject>
 #include <QJsonArray>
@@ -10,6 +12,7 @@
 
 #include "bookmodel.h"
 #include "levelpicker.h"
+
 
 using namespace untitled;
 

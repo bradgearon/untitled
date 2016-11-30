@@ -1,4 +1,4 @@
-#include <QDebug>
+
 #include "models.h"
 
 LevelPicker::LevelPicker(QJsonArray json)
@@ -16,12 +16,6 @@ void LevelPicker::setLevelsAndScores(QJsonArray json) {
     for (size_t i = 0; i < count; i++) {
         int ii = static_cast<int>(i);
 
-        // this does 10.1 for rank 15 when 1
-        // double nextRank = i + 1 < count ?
-            //        json[ii + 1].toObject()["rank"].toDouble() :
-               //     0;
-
-        // this does 5.1 for rank 15 when 1
         double nextRank =  0;
         this->levels[i] = new Level(json[ii].toObject(), nextRank);
 
@@ -36,7 +30,12 @@ void LevelPicker::setLevelsAndScores(QJsonArray json) {
 
 void LevelPicker::setRead(QString element, double read)
 {
-    this->scoreMap[element]->setRead(read);
+    if(scoreMap.count(element) < 1) {
+        return;
+    }
+
+    scoreMap[element]->setRead(read);
+    rebuild = true;
 }
 
 Score* LevelPicker::getScore(QString element)
@@ -44,9 +43,48 @@ Score* LevelPicker::getScore(QString element)
     return this->scoreMap[element];
 }
 
-QString LevelPicker::pick() {
+void LevelPicker::rebuildRandom() {
+    auto seed = std::chrono::system_clock::now().time_since_epoch().count();
+    gen = std::default_random_engine(seed);
+
+    std::vector<double> intervals(this->scoreMap.size());
+    std::iota(intervals.begin(), intervals.end(), 0);
+
+    for(auto interval: intervals) {
+        qDebug() << " interval " << interval;
+    }
+
+    std::vector<double> weights(this->scoreMap.size());
+    scores = std::vector<Score *>(this->scoreMap.size());
+
+    size_t i = 0;
+    for(auto score: this->scoreMap) {
+        scores[i++] = score.second;
+    }
+
+    std::sort(scores.begin(), scores.end(), [](Score * first, Score * second) {
+        return first->getWeight() > second->getWeight();
+    });
+
+    i = 0;
+    for(auto score: scores) {
+        qDebug() << " score " << i << " " << score->getName() << " weight " << score->getWeight();
+        weights[i++] = score->getWeight();
+    }
+
+    random = std::piecewise_constant_distribution<>(
+                intervals.begin(), intervals.end(), weights.begin());
+}
 
 
+Score* LevelPicker::pick() {
+    if(rebuild) {
+        rebuildRandom();
+        rebuild = false;
+    }
 
+    double picked = random(gen);
+    qDebug() << " picked " << picked;
+    return scores[static_cast<size_t>(picked)];
 }
 
