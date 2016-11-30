@@ -1,58 +1,52 @@
 #include <QDebug>
-#include "levelpicker.h"
-#include "score.h"
+#include "models.h"
 
 LevelPicker::LevelPicker(QJsonArray json)
 {
-    u_int count = static_cast<u_int>(json.count());
+    size_t count = static_cast<size_t>(json.count());
     this->levels = std::vector<Level *>(count);
-    this->levelMap = std::map<QString, Score *>();
+    this->scoreMap = std::map<QString, Score *>();
 
-    updateLevelsAndScores(json);
+    setLevelsAndScores(json);
 }
 
-void LevelPicker::updateLevelsAndScores(QJsonArray json) {
-    u_int count = static_cast<u_int>(this->levels.size());
+void LevelPicker::setLevelsAndScores(QJsonArray json) {
+    size_t count = static_cast<size_t>(this->levels.size());
 
-    for (u_int i = 0; i < count; i++) {
-        Level* level;
+    for (size_t i = 0; i < count; i++) {
         int ii = static_cast<int>(i);
 
-        if(this->levels[i] == NULL) {
-            level = this->levels[i];
-        } else {
-            level = new Level(json[ii].toObject());
-            this->levels[i] = level;
-        }
+        // this does 10.1 for rank 15 when 1
+        // double nextRank = i + 1 < count ?
+            //        json[ii + 1].toObject()["rank"].toDouble() :
+               //     0;
 
-        double nextDiff = count > i + 1 ?
-                    level->getRank() - json[ii + 1].toObject()["rank"].toInt() :
-                    level->getRank() * .5;
+        // this does 5.1 for rank 15 when 1
+        double nextRank =  0;
+        this->levels[i] = new Level(json[ii].toObject(), nextRank);
 
-        for(auto element: level->getElements()) {
-            Score * levelScore;
-
-            if(this->levelMap[element] == NULL) {
-                levelScore = new Score();
-                this->levelMap[element] = levelScore;
-            } else {
-                levelScore = this->levelMap[element];
+        for(auto score: this->levels[i]->getScores()) {
+            if(this->scoreMap[score->getName()] == NULL) {
+                this->scoreMap[score->getName()] = score;
             }
-
-            // todo: connect Score::onValueUpdated to updateWhateverItis
-            levelScore->setName(element);
-            levelScore->setRank(level->getRank());
-            levelScore->setWeight(level->getRank());
-            levelScore->setLevel(level);
-            levelScore->setNextDifference(nextDiff);
-
         }
     }
 }
 
 
-std::vector<Level *> LevelPicker::getLevels()
+void LevelPicker::setRead(QString element, double read)
 {
-    return this->levels;
+    this->scoreMap[element]->setRead(read);
+}
+
+Score* LevelPicker::getScore(QString element)
+{
+    return this->scoreMap[element];
+}
+
+QString LevelPicker::pick() {
+
+
+
 }
 

@@ -6,7 +6,10 @@
 #include <QFile>
 #include <QDesktopServices>
 #include <QDebug>
+#include <functional>
+
 #include "levelpicker.h"
+
 
 int main(int argc, char *argv[])
 {
@@ -30,14 +33,16 @@ int main(int argc, char *argv[])
     levelJson.close();
     LevelPicker picker(json.array());
 
-    for(auto level: picker.getLevels()) {
-        qDebug() << "level: " << level->getRank();
-    }
+    // picker.setRead("Gen-1-1", 1);
+
 
     QWindow *root = qobject_cast<QWindow *>(
                 engine.rootObjects().first());
 
     root->setProperty("model",  model);
+
+    root->setWidth(800);
+    root->setHeight(400);
 
     // pick an element:
     // pick a level

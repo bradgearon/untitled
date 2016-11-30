@@ -1,22 +1,20 @@
-#ifndef LEVELPICKER_H
-#define LEVELPICKER_H
+#pragma once
+#include "models.h"
 
-#include <QJSValue>
-#include "level.h"
-#include "score.h"
-
+namespace untitled {
 class LevelPicker
 {
 private:
     std::vector<Level *> levels;
-    std::map<QString, Score *> levelMap;
+    std::map<QString, Score *> scoreMap;
+    void setLevelsAndScores(QJsonArray json);
 
 public:
     LevelPicker (QJsonArray levels);
-    std::vector<Level *> getLevels();
+    void setRead(QString element, double read);
+    QString pick();
+    Score* getScore(QString element);
 
-    void updateLevels();
-    void updateLevelsAndScores(QJsonArray json);
+
 };
-
-#endif // LEVELPICKER_H
+}

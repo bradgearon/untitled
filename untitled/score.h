@@ -1,10 +1,8 @@
-#ifndef SCORE_H
-#define SCORE_H
+#pragma once
+#include "models.h"
 
-#include "level.h"
-
-#include <QObject>
-#include <QString>
+namespace untitled {
+class Level;
 
 class Score : public QObject
 {
@@ -24,25 +22,27 @@ public:
     Level *getLevel() const;
     void setLevel(Level *value);
 
-    double getValue() const;
-    void setValue(double value);
+    double getRead() const;
+    void setRead(double read);
 
     double getNextDifference() const;
     void setNextDifference(double value);
 
-private:
-    QString name;
-    double rank;
-    double weight;
-    double value;
-    double nextDifference;
-    Level *level;
+public slots:
+    void onReadChanged(double read);
 
 signals:
+    void readChanged(double read);
 
-public slots:
-    void onValueUpdated(double value);
+private:
+    double rank = 0;
+    double weight = 0;
+    double read = 0;
+    double nextDifference = 0;
+
+    QString name;
+
+    Level *level;
+
 };
-
-
-#endif // SCORE_H
+}

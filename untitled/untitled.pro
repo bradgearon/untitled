@@ -22,6 +22,7 @@ HEADERS += \
     bookmodel.h \
     levelpicker.h \
     level.h \
-    score.h
+    score.h \
+    models.h
 
 DISTFILES +=

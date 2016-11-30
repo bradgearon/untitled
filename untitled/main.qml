@@ -5,7 +5,6 @@ import QtQuick.Layouts 1.0
 ApplicationWindow {
     visible: true
     title: qsTr("Hello World")
-    visibility: "FullScreen"
     id: main
     property var model
 

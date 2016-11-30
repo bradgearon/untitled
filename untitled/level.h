@@ -1,30 +1,33 @@
-#ifndef LEVEL_H
-#define LEVEL_H
+#pragma once
+#include "models.h"
 
-#include <QObject>
-#include <QJsonObject>
-#include <QJsonArray>
+namespace untitled {
+class Score;
 
 class Level : public QObject
 {
     Q_OBJECT
 public:
     explicit Level(QObject *parent = 0);
-    Level(QJsonObject level);
+    Level(QJsonObject level, double nextRank = 0);
 
-    int32_t getRank();
-    std::vector<QString> getElements();
+    double getRank();
+    double getReadTotal();
+    std::vector<Score *> getScores();
 
 private:
-    int32_t rank;
-    std::vector<QString> elements;
+    double rank = 0;
+    double percentComplete = 0;
 
-    void setRank(int32_t rank);
-    void setElements(std::vector<QString> elements);
+    std::vector<Score *> scores;
+
+    void setRank(double rank);
+    void setScores(std::vector<Score *> scores);
 
 signals:
 
 public slots:
-};
 
-#endif // LEVEL_H
+
+};
+}
