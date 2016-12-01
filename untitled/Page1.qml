@@ -37,15 +37,15 @@ Page1Form {
 
     onWidthChanged: function() {
         if(width > height) {
-            close.opacity = 1;
-            closeTimer.opacity = 1;
+            close.opacity = .75;
+            closeTimer.opacity = .75;
         }
     }
 
     flickable.onContentYChanged: function() {
         if(!model || width > height) {
-            close.opacity = 1;
-            closeTimer.opacity = 1;
+            close.opacity = .75;
+            closeTimer.opacity = .75;
             return;
         }
 
@@ -71,8 +71,8 @@ Page1Form {
             closeTimer.opacity = .25;
             close.opacity = .25;
         } else {
-            closeTimer.opacity = 1;
-            close.opacity = 1;
+            closeTimer.opacity = .75;
+            close.opacity = .75;
         }
 
     }

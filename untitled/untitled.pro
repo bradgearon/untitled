@@ -2,6 +2,7 @@ QT += quick quickcontrols2 sql
 CONFIG += c++11
 # qtc_runnable
 
+
 #build_pass:CONFIG(debug, debug) {
 #  copydata.commands = $(COPY_DIR) $$system_path($$PWD/app_webview) \
 #      $$system_path($$OUT_PWD/app_webview)
