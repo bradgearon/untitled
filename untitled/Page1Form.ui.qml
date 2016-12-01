@@ -1,6 +1,6 @@
 import QtQuick 2.7
 import QtQuick.Controls 2.0
-import QtQuick.Layouts 1.0
+import QtQuick.Controls.Material 2.1
 
 Item {
     property alias verse: textArea1.text
@@ -13,39 +13,51 @@ Item {
         id: leftPane
         width: frame1.width
         height: frame1.height
-        z: 100
+        z: 10
         padding: 0
+        Material.elevation: 4
 
         Flickable {
             anchors.fill: parent
             id: flick
             TextArea.flickable: textArea1
             boundsBehavior: Flickable.StopAtBounds
-            ScrollBar.vertical: ScrollBar {
-            }
+            ScrollBar.vertical: ScrollBar { }
+
             TextArea {
-                z: 100
                 id: textArea1
-                padding: 12
+
+                anchors.fill: parent
+                rightPadding: 14
+                leftPadding: 14
+                topPadding: 14
+                bottomPadding: 0
+
                 textFormat: Text.AutoText
                 wrapMode: Text.Wrap
+
                 font.pixelSize: 18
-                text: "This \n is\n some\n text"
-                anchors.fill: parent
+                text: "<big><b>This is some text</b></big><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel massa a tortor suscipit tincidunt nec malesuada nunc. Aenean porta tortor et eros tempor, venenatis blandit magna egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce tincidunt massa dui, in condimentum elit blandit ac. Nulla tempor vel nunc at pellentesque. Aenean luctus justo quam, nec ultricies nulla auctor et. Proin eleifend velit sed interdum rutrum. Maecenas sed bibendum nisl, non vestibulum ligula. Integer in vulputate odio. In vitae feugiat ex. Duis nec ligula at tortor vulputate facilisis. Sed aliquam lorem at nibh suscipit rutrum. Aliquam quis ex est. Donec et feugiat odio, eu semper nulla. Sed auctor et lacus in imperdiet. Aliquam et ornare ante. Maecenas suscipit fringilla orci. Praesent elementum mi mauris, eu pretium mauris efficitur vitae. Nulla suscipit ligula in eros congue fermentum. Aliquam ultrices, mi quis sagittis gravida, libero odio ultricies arcu, quis pretium dolor est nec ligula. Nunc porttitor ligula non nisl volutpat ultrices. Etiam eget leo et mi volutpat bibendum quis at est."
+
+                font.family: "Roboto"
                 readOnly: true
+
             }
         }
+
     }
 
     Pane {
         id: frame1
         y: parent.height * .5
         height: parent.height - parent.height * .5
+        z: 5
         width: parent.width
         padding: 0
 
         ListView {
             id: listView1
+            z: 10
             snapMode: ListView.SnapOneItem
             orientation: ListView.Horizontal
             anchors.fill: parent
@@ -150,18 +162,18 @@ Item {
 
     Button {
         id: close
-        width: 35
-        height: 35
-
-        visible: false
+        width: height - 10
+        visible: true
         anchors.top: parent.top
-        anchors.topMargin: 8
+        anchors.topMargin: 6
         anchors.right: parent.right
-        anchors.rightMargin: 8
+        anchors.rightMargin: 12
 
         text: qsTr("X")
-        z: 100
-        font.pixelSize: (height * .5)
+        Material.elevation: 1
+        opacity: .75
+        z: 10
+        font.pixelSize: (height * .35)
     }
 
     Text {
@@ -170,26 +182,25 @@ Item {
         text: '5'
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
-
-        z: 100
+        z: 10
         font.pixelSize: (height * .5)
     }
 
     Button {
         id: learnMore
-        height: 49
-        z: 110
+        z: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 7
         anchors.right: parent.right
         anchors.rightMargin: 7
-        padding: 14
-        font.pixelSize: (height * .5) - 7
+
+        // onLinkActivated: Qt.openUrlExternally(link)
 
         text: qsTr("Learn More...")
-        rightPadding: 21
-        leftPadding: 21
-        topPadding: 14
+        highlighted: true
+        bottomPadding: 20
+        topPadding: 20
+        padding: 16
     }
 
     states: State {
@@ -209,5 +220,9 @@ Item {
             width: frame1.x
             height: parent.height
         }
+        }
+        }
+
+
     }
 }

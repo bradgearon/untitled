@@ -3,11 +3,10 @@
 
 #include <QObject>
 
-class BookModel : public QObject
-{
-    Q_OBJECT
+class BookModel : public QObject {
+  Q_OBJECT
 public:
-    explicit BookModel(QObject *parent = 0);
+  explicit BookModel(QObject *parent = 0);
 
 signals:
 

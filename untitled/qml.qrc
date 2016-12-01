@@ -1100,5 +1100,6 @@
         <file>data/books.json</file>
         <file>data/culture.json</file>
         <file>data/level.json</file>
+        <file>qtquickcontrols2.conf</file>
     </qresource>
 </RCC>

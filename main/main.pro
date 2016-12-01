@@ -2,7 +2,10 @@ TEMPLATE = subdirs
 # CONFIG += qtc_runnable
 
 SUBDIRS = \
-  ../untitled \
-  ../tests
+  ../untitled
+
+win32: {
+SUBDIRS += ../tests
+}
 
 tests.depends = untitled

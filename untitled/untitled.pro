@@ -1,4 +1,4 @@
-QT += qml quick sql
+QT += quick quickcontrols2 sql
 CONFIG += c++11
 # qtc_runnable
 

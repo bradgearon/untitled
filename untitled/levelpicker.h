@@ -2,28 +2,25 @@
 #include "models.h"
 
 namespace untitled {
-class LevelPicker
-{
+class LevelPicker {
 protected:
-    std::vector<Level *> levels;
-    std::map<QString, Score *> scoreMap;
-    std::vector<Score *> scores;
+  std::vector<Level *> levels;
+  std::map<QString, Score *> scoreMap;
+  std::vector<Score *> scores;
 
 private:
-    std::default_random_engine gen;
-    std::piecewise_constant_distribution<> random;
+  std::default_random_engine gen;
+  std::piecewise_constant_distribution<> random;
 
-    bool rebuild = true;
+  bool rebuild = true;
 
-    void setLevelsAndScores(QJsonArray json);
-    void rebuildRandom();
+  void setLevelsAndScores(QJsonArray json);
+  void rebuildRandom();
 
 public:
-    LevelPicker (QJsonArray levels);
-    void setRead(QString element, double read);
-    Score* pick();
-    Score* getScore(QString element);
-
-
+  LevelPicker(QJsonArray levels);
+  void setRead(QString element, double read);
+  Score *pick();
+  Score *getScore(QString element);
 };
 }
