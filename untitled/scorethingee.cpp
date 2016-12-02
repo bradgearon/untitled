@@ -6,12 +6,14 @@ ScoreThingee::ScoreThingee(LevelPicker *picker) {
 }
 
 QJsonObject ScoreThingee::getCookieValue() {
-  auto dbPath =
-#ifdef WIN32
-      QCoreApplication::applicationDirPath() + "/" +
+#if !WIN32
+  auto appData =
+      QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[0];
+#else
+  auto appData = QCoreApplication::applicationDirPath();
 #endif
-      "app_webview/Cookies";
-
+  auto dbPath =
+      QFileInfo(appData).dir().absolutePath() + "/app_webview/Cookies";
   qDebug() << dbPath;
   auto db = QSqlDatabase::addDatabase("QSQLITE");
   db.setDatabaseName(dbPath);

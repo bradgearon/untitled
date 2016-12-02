@@ -1,11 +1,12 @@
 TEMPLATE = subdirs
-CONFIG += c++14
 
 SUBDIRS = \
+  ../assets \
   ../untitled
 
 win32: {
   SUBDIRS += ../tests
 }
 
+untitled.depends = assets
 tests.depends = untitled

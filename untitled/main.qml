@@ -5,6 +5,7 @@ ApplicationWindow {
     id: main
     visible: true
     property var model
+    property string imageName
 
     Page1 {
         anchors.fill: parent

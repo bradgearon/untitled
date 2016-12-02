@@ -21,7 +21,7 @@ void testPicker(LevelPicker *picker, ScoreThingee *scores) {
   picker->setRead("Acts-2-1", 1);
 
   for (int i = 0; i < 100; i++) {
-    Score *picked = picker->pick();
+    auto picked = picker->pick();
 
     qDebug() << " picked: " << picked->getName() << " " << picked->getWeight()
              << " " << picked->getRank();
@@ -32,7 +32,17 @@ void testPicker(LevelPicker *picker, ScoreThingee *scores) {
   }
 }
 
+QJsonDocument loadJson(QString path) {
+  QFile jsonFile(path);
+  jsonFile.open(QFile::ReadOnly);
+  auto json = QJsonDocument::fromJson(jsonFile.readAll());
+  jsonFile.close();
+  return json;
+}
+
 int main(int argc, char *argv[]) {
+  Q_INIT_RESOURCE(assets);
+
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QQuickStyle::setStyle("Material");
 
@@ -51,28 +61,77 @@ int main(int argc, char *argv[]) {
   root->setPosition(-1360, 340);
 #endif
 
-  QFile levelJson(":/data/level.json");
-  levelJson.open(QFile::ReadOnly);
-  auto json = QJsonDocument::fromJson(levelJson.readAll());
-  levelJson.close();
-
-  LevelPicker picker(json.array());
+  auto levels = loadJson(":/data/level.json");
+  LevelPicker picker(levels.array());
 
   auto locale = QLocale::system();
   auto isoLang = locale.name().split("_")[0];
 
-  QFile testJson(":/test.json");
-  testJson.open(QFile::ReadOnly);
-  json = QJsonDocument::fromJson(testJson.readAll());
-  testJson.close();
+  auto cultures = loadJson(":/data/culture.json");
+  auto culture = cultures.object()[isoLang];
+  qDebug() << culture;
 
-  auto model = json.toVariant();
+  auto books = loadJson(":/data/books.json").array();
+  auto bookMap = std::map<QString, Book *>();
+
+  for (uchar index = 0; index < books.count(); index++) {
+    auto list = books[index].toArray();
+    for (auto book : list) {
+      auto bookObj = book.toObject();
+      Book bookModel(0);
+
+      bookModel.setIndex(index);
+      bookModel.setAbbr(bookObj["abbr"].toString());
+      bookModel.setName(bookObj["name"].toString());
+      bookModel.setOrder(bookObj["ord"].toString());
+
+      bookMap[bookModel.getAbbr()] = &bookModel;
+
+      qDebug() << bookModel.getAbbr() << " " << bookModel.getName() << " "
+               << bookModel.getIndex() << " " << bookModel.getOrder();
+    }
+  }
+
+  auto defaultConfig = loadJson(":/data/config/default.json");
+  auto config = loadJson(":/data/config/" + isoLang + ".json");
+
+  auto configObj = config.object();
+  auto defaultConfigObj = defaultConfig.object();
+
+  for (auto key : defaultConfigObj.keys()) {
+    if (configObj.contains(key)) {
+      qDebug() << "skipping property " << key;
+      continue;
+    }
+    configObj[key] = defaultConfigObj[key];
+  }
+
+  auto scoreThingee = std::make_unique<ScoreThingee>(&picker);
+
+  scoreThingee->readScores();
+  scoreThingee->saveScores();
+
+  auto picked = picker.pick();
+  auto parts = picked->getName().split('-');
+
+  QString version;
+  auto versionObj = configObj["version"];
+  if (versionObj.isArray()) {
+    // parts[0] is the Book // get the order from the map
+    version = versionObj.toArray()[bookMap[parts[0]]->getIndex()].toString();
+  } else {
+    version = versionObj.toString();
+  }
+
+  auto path = ":/data/word/" + picked->getName() + "/" + version + ".json";
+  auto imagePath = "images/" + picked->getName() + ".jpg";
+
+  auto testModel = loadJson(path);
+
+  auto model = testModel.toVariant();
+
+  root->setProperty("imageName", imagePath);
   root->setProperty("model", model);
-
-  ScoreThingee scoreThingee = ScoreThingee(&picker);
-
-  scoreThingee.readScores();
-  scoreThingee.saveScores();
 
   return app.exec();
 }

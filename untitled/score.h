@@ -24,8 +24,6 @@ public:
   double getNextDifference() const;
   void setNextDifference(double value);
 
-  ~Score();
-
 public slots:
   void onReadChanged(double read);
 
@@ -40,6 +38,6 @@ private:
 
   QString name;
 
-  std::unique_ptr<Level> level;
+  Level *level;
 };
 }

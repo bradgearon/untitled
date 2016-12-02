@@ -19,7 +19,7 @@ class Score;
 #include "level.h"
 #include "score.h"
 
-#include "bookmodel.h"
+#include "book.h"
 #include "levelpicker.h"
 
 using namespace untitled;

@@ -80,6 +80,9 @@ Item {
 
             model: ListModel {
                 ListElement {
+                    image: imageName
+                }
+                ListElement {
                     image: "images/Gen-1-1.jpg"
                 }
                 ListElement {

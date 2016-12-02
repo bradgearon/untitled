@@ -2,7 +2,7 @@
 
 Score::Score(Level *level) : QObject() {
   qDebug() << "creating score";
-  this->level = std::unique_ptr<Level>(level);
+  this->level = level;
   connect(this, &Score::readChanged, &Score::onReadChanged);
 }
 
@@ -37,11 +37,13 @@ void Score::onReadChanged(double read) {
   auto subtractFromWeight = read * getNextDifference();
   auto addToWeight = read * percentComplete;
 
+  qDebug() << " " << read << " " << percentComplete << " " << addToWeight << " "
+           << subtractFromWeight << " " << readTotal << " a "
+           << getNextDifference();
+
   setWeight(getRank() + addToWeight - subtractFromWeight);
 
   qDebug() << "weight for element " << getName() << " now " << getWeight()
            << " in rank " << getRank() << " read " << readTotal
            << " percent complete: " << percentComplete;
 }
-
-Score::~Score() { qDebug() << "destroying score"; }

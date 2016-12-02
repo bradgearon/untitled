@@ -1,11 +1,11 @@
 #ifndef LANGUAGETHINGEE_H
 #define LANGUAGETHINGEE_H
 
-
-class LanguageThingee
-{
+class LanguageThingee {
 public:
-    LanguageThingee();
+  LanguageThingee();
+
+private:
 };
 
 #endif // LANGUAGETHINGEE_H

@@ -1,7 +1,4 @@
 QT += core sql
-QT -= gui
-
-CONFIG += c++14
 
 TARGET = tests
 
@@ -10,17 +7,22 @@ CONFIG -= app_bundle
 
 TEMPLATE = app
 
-untitledObj = ../untitled/debug
+include(../main/common.pri)
 
-OBJECTS += $${untitledObj}/levelpicker.o \
-  $${untitledObj}/level.o \
-  $${untitledObj}/score.o \
-  $${untitledObj}/moc_score.o \
-  $${untitledObj}/moc_level.o
+TEST = $$files($$OBJECTS_DIR/*.o*)
+for(object, TEST) {
+  uhh = $$find(object, main)
+  count(uhh, 0) {
+    OBJECTS += $$object
+    message($$object)
+  }
+}
+
+# LIBS += $$DESTDIR/untitled.$$EXT
 
 INCLUDEPATH += ../untitled
 
-SOURCES += main.cpp
+SOURCES += testlevelpicker.cpp
 
 OTHER_FILES += \
   level.json
@@ -28,3 +30,4 @@ OTHER_FILES += \
 HEADERS += \
     tests.h
 
+DESTDIR = build/$$PLATFORM

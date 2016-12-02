@@ -3,6 +3,8 @@ import QtQuick 2.7
 Page1Form {
     id: page1
     property var model
+    property string imageName
+
     property int timerTotal: 5
     property int timerCurrent: 0
 

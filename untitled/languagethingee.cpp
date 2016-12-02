@@ -1,6 +1,3 @@
 #include "languagethingee.h"
 
-LanguageThingee::LanguageThingee()
-{
-
-}
+LanguageThingee::LanguageThingee() {}

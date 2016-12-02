@@ -11,14 +11,13 @@ public:
 
   double getRank();
   double getReadTotal();
-  const std::vector<std::shared_ptr<Score>> &getScores();
-  ~Level();
+  const std::vector<std::unique_ptr<Score>> &getScores();
 
 private:
   double rank = 0;
   double percentComplete = 0;
 
-  std::vector<std::shared_ptr<Score>> scores;
+  std::vector<std::unique_ptr<Score>> scores;
 
   void setRank(double rank);
 

@@ -1,5 +1,4 @@
-#include "models.h"
-#include <QDebug>
+#include "level.h"
 
 Level::Level(QObject *parent) : QObject(parent) {}
 
@@ -11,11 +10,11 @@ Level::Level(QJsonObject level, double nextRank) : Level() {
 
   QJsonArray elements = level["elements"].toArray();
   auto length = static_cast<size_t>(elements.count());
-  this->scores = std::vector<std::shared_ptr<Score>>(length);
+  this->scores = std::vector<std::unique_ptr<Score>>(length);
 
   size_t i = 0;
   for (auto element : elements) {
-    auto score = std::make_shared<Score>(this);
+    auto score = std::make_unique<Score>(this);
 
     // todo: connect Score::onValueUpdated to updateWhateverItis
     score->setName(element.toString());
@@ -23,7 +22,7 @@ Level::Level(QJsonObject level, double nextRank) : Level() {
     score->setWeight(getRank());
     score->setNextDifference(nextDifference);
 
-    scores[i] = score;
+    scores[i] = std::move(score);
     i++;
   }
 }
@@ -32,7 +31,7 @@ double Level::getRank() { return this->rank; }
 
 void Level::setRank(double rank) { this->rank = rank; }
 
-const std::vector<std::shared_ptr<Score>> &Level::getScores() {
+const std::vector<std::unique_ptr<Score>> &Level::getScores() {
   return this->scores;
 }
 
@@ -41,5 +40,3 @@ double Level::getReadTotal() {
       scores.begin(), scores.end(), 0,
       [](double sum, auto &&score) { return sum + score->getRead(); });
 }
-
-Level::~Level() { qDebug() << " destroying level"; }

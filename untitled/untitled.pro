@@ -1,38 +1,28 @@
 QT += quick quickcontrols2 sql
-# qtc_runnable
-CONFIG += c++14
 
-QT -= widgets
+include(../main/common.pri)
 
-win32: {
-  DEFINES += WIN32
-}
-
-#build_pass:CONFIG(debug, debug) {
-#  copydata.commands = $(COPY_DIR) $$system_path($$PWD/app_webview) \
-#      $$system_path($$OUT_PWD/app_webview)
-#  first.depends = $(first) copydata
-#  export(first.depends)
-#  export(copydata.commands)
-
-#  QMAKE_EXTRA_TARGETS += first copydata
-#}
+#todo: make sure this is ok
+QT -= network
 
 RESOURCES += qml.qrc
 
+LIBS += -L$$DESTDIR -lassets
+
 SOURCES += main.cpp \
-    bookmodel.cpp \
     levelpicker.cpp \
     level.cpp \
     score.cpp \
     scorethingee.cpp \
-    languagethingee.cpp
+    languagethingee.cpp \
+    book.cpp
 
 HEADERS += \
-    bookmodel.h \
     levelpicker.h \
     level.h \
     score.h \
     models.h \
     scorethingee.h \
-    languagethingee.h
+    languagethingee.h \
+    book.h
+
