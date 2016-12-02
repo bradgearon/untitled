@@ -4,6 +4,7 @@ import QtQuick.Controls.Material 2.0
 
 Item {
     id: item1
+    property alias mainImage: image1.source
     property alias verse: textArea1.text
     property alias flickable: flick
     property alias textArea: textArea1
@@ -59,111 +60,13 @@ Item {
         width: parent.width
         padding: 0
 
-        ListView {
-            id: listView1
-            z: 10
-            snapMode: ListView.SnapOneItem
-            orientation: ListView.Horizontal
-            anchors.fill: parent
-            contentHeight: parent.height
-            contentWidth: parent.width
-            flickableDirection: Flickable.AutoFlickDirection
-
-            delegate: Image {
-                z: 80
-                id: image1
-                width: frame1.width
-                height: frame1.height
-                source: image
-                fillMode: Image.PreserveAspectCrop
-            }
-
-            model: ListModel {
-                ListElement {
-                    image: imageName
-                }
-                ListElement {
-                    image: "images/Gen-1-1.jpg"
-                }
-                ListElement {
-                    image: "images/1Jn-4-7.jpg"
-                }
-                ListElement {
-                    image: "images/Acts-2-1.jpg"
-                }
-                ListElement {
-                    image: "images/Ex-14-10.jpg"
-                }
-                ListElement {
-                    image: "images/1Jn-4-1.jpg"
-                }
-                ListElement {
-                    image: "images/Gen-6-9.jpg"
-                }
-                ListElement {
-                    image: "images/John-10-1.jpg"
-                }
-                ListElement {
-                    image: "images/John-14-1.jpg"
-                }
-                ListElement {
-                    image: "images/John-14-15.jpg"
-                }
-                ListElement {
-                    image: "images/John-15-1.jpg"
-                }
-                ListElement {
-                    image: "images/John-3-16.jpg"
-                }
-                ListElement {
-                    image: "images/John-6-35.jpg"
-                }
-                ListElement {
-                    image: "images/Luk-2-8.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-10-26.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-14-14.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-14-22.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-17-1.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-19-13.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-19-16.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-3-13.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-6-19.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-6-25.jpg"
-                }
-                ListElement {
-                    image: "images/Mat-6-5.jpg"
-                }
-                ListElement {
-                    image: "images/Mk-11-20.jpg"
-                }
-                ListElement {
-                    image: "images/Mk-4-35.jpg"
-                }
-                ListElement {
-                    image: "images/Ps-107-1.jpg"
-                }
-                ListElement {
-                    image: "images/Rom-8-31.jpg"
-                }
-            }
+        Image {
+            z: 5
+            id: image1
+            width: frame1.width
+            height: frame1.height
+            source: "images/Ex-14-10.jpg"
+            fillMode: Image.PreserveAspectCrop
         }
     }
 
@@ -201,7 +104,6 @@ Item {
         anchors.bottomMargin: 7
         anchors.right: parent.right
         anchors.rightMargin: 7
-
 
         // onLinkActivated: Qt.openUrlExternally(link)
         text: qsTr("Learn More...")

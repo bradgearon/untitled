@@ -128,10 +128,9 @@ int main(int argc, char *argv[]) {
 
   auto testModel = loadJson(path);
 
-  auto model = testModel.toVariant();
-
-  root->setProperty("imageName", imagePath);
-  root->setProperty("model", model);
+  auto testObject = testModel.object();
+  testObject["imageName"] = imagePath;
+  root->setProperty("model", testObject.toVariantMap());
 
   return app.exec();
 }
