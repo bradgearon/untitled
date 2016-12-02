@@ -2,12 +2,12 @@
 #include "models.h"
 
 namespace untitled {
-class Level;
 
 class Score : public QObject {
   Q_OBJECT
 public:
   explicit Score(QObject *parent = 0);
+  Score(Level *level);
 
   QString getName() const;
   void setName(const QString &value);
@@ -18,14 +18,13 @@ public:
   double getWeight() const;
   void setWeight(double value);
 
-  Level *getLevel() const;
-  void setLevel(Level *value);
-
   double getRead() const;
   void setRead(double read);
 
   double getNextDifference() const;
   void setNextDifference(double value);
+
+  ~Score();
 
 public slots:
   void onReadChanged(double read);
@@ -41,6 +40,6 @@ private:
 
   QString name;
 
-  Level *level;
+  std::unique_ptr<Level> level;
 };
 }

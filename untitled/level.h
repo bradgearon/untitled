@@ -2,7 +2,6 @@
 #include "models.h"
 
 namespace untitled {
-class Score;
 
 class Level : public QObject {
   Q_OBJECT
@@ -12,16 +11,16 @@ public:
 
   double getRank();
   double getReadTotal();
-  std::vector<Score *> getScores();
+  const std::vector<std::shared_ptr<Score>> &getScores();
+  ~Level();
 
 private:
   double rank = 0;
   double percentComplete = 0;
 
-  std::vector<Score *> scores;
+  std::vector<std::shared_ptr<Score>> scores;
 
   void setRank(double rank);
-  void setScores(std::vector<Score *> scores);
 
 signals:
 

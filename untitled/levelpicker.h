@@ -4,7 +4,7 @@
 namespace untitled {
 class LevelPicker {
 protected:
-  std::vector<Level *> levels;
+  std::vector<std::unique_ptr<Level>> levels;
   std::map<QString, Score *> scoreMap;
   std::vector<Score *> scores;
 

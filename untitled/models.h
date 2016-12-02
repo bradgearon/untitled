@@ -11,6 +11,11 @@
 #include <QSaveFile>
 #include <QtSql>
 
+namespace untitled {
+class Level;
+class Score;
+}
+
 #include "level.h"
 #include "score.h"
 

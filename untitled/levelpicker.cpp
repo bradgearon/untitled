@@ -3,7 +3,7 @@
 
 LevelPicker::LevelPicker(QJsonArray json) {
   size_t count = static_cast<size_t>(json.count());
-  levels = std::vector<Level *>(count);
+  levels = std::vector<std::unique_ptr<Level>>(count);
   scoreMap = std::map<QString, Score *>();
 
   setLevelsAndScores(json);
@@ -18,11 +18,11 @@ void LevelPicker::setLevelsAndScores(QJsonArray json) {
     int ii = static_cast<int>(i);
 
     double nextRank = 0;
-    this->levels[i] = new Level(json[ii].toObject(), nextRank);
+    this->levels[i] = std::make_unique<Level>(json[ii].toObject(), nextRank);
 
-    for (auto score : this->levels[i]->getScores()) {
+    for (auto &score : this->levels[i]->getScores()) {
       if (this->scoreMap[score->getName()] == NULL) {
-        this->scoreMap[score->getName()] = score;
+        this->scoreMap[score->getName()] = score.get();
       }
     }
   }

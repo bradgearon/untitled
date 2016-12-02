@@ -2,13 +2,13 @@
 
 ScoreThingee::ScoreThingee(LevelPicker *picker) {
   this->picker = picker;
-  saveFile = std::unique_ptr<QSaveFile>(new QSaveFile("read.dat"));
+  saveFile = std::make_unique<QSaveFile>("read.dat");
 }
 
 QJsonObject ScoreThingee::getCookieValue() {
   auto dbPath =
-#ifndef WIN32
-      QFileInfo(QDir::currentPath()).dir().absolutePath() + "/" +
+#ifdef WIN32
+      QCoreApplication::applicationDirPath() + "/" +
 #endif
       "app_webview/Cookies";
 
@@ -80,6 +80,5 @@ void ScoreThingee::saveScores() {
     }
   }
   saveFile->commit();
-  saveStream.~QDataStream();
   qDebug() << "saving scores";
 }

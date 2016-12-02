@@ -1,6 +1,8 @@
 #include "score.h"
 
-Score::Score(QObject *parent) : QObject(parent) {
+Score::Score(Level *level) : QObject() {
+  qDebug() << "creating score";
+  this->level = std::unique_ptr<Level>(level);
   connect(this, &Score::readChanged, &Score::onReadChanged);
 }
 
@@ -15,10 +17,6 @@ void Score::setRank(double value) { rank = value; }
 double Score::getWeight() const { return weight; }
 
 void Score::setWeight(double value) { weight = value; }
-
-Level *Score::getLevel() const { return level; }
-
-void Score::setLevel(Level *value) { level = value; }
 
 double Score::getRead() const { return read; }
 
@@ -45,3 +43,5 @@ void Score::onReadChanged(double read) {
            << " in rank " << getRank() << " read " << readTotal
            << " percent complete: " << percentComplete;
 }
+
+Score::~Score() { qDebug() << "destroying score"; }

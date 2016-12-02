@@ -80,7 +80,7 @@ Item {
 
             model: ListModel {
                 ListElement {
-                    image: "images/1Jn-4-1.jpg"
+                    image: "images/Gen-1-1.jpg"
                 }
                 ListElement {
                     image: "images/1Jn-4-7.jpg"
@@ -92,7 +92,7 @@ Item {
                     image: "images/Ex-14-10.jpg"
                 }
                 ListElement {
-                    image: "images/Gen-1-1.jpg"
+                    image: "images/1Jn-4-1.jpg"
                 }
                 ListElement {
                     image: "images/Gen-6-9.jpg"

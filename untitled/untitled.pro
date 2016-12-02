@@ -1,6 +1,12 @@
 QT += quick quickcontrols2 sql
-CONFIG += c++11
 # qtc_runnable
+CONFIG += c++14
+
+QT -= widgets
+
+win32: {
+  DEFINES += WIN32
+}
 
 #build_pass:CONFIG(debug, debug) {
 #  copydata.commands = $(COPY_DIR) $$system_path($$PWD/app_webview) \
@@ -19,7 +25,8 @@ SOURCES += main.cpp \
     levelpicker.cpp \
     level.cpp \
     score.cpp \
-    scorethingee.cpp
+    scorethingee.cpp \
+    languagethingee.cpp
 
 HEADERS += \
     bookmodel.h \
@@ -27,4 +34,5 @@ HEADERS += \
     level.h \
     score.h \
     models.h \
-    scorethingee.h
+    scorethingee.h \
+    languagethingee.h

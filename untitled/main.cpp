@@ -1,8 +1,6 @@
 #include <QDebug>
 #include <QDesktopServices>
-#include <QFile>
 #include <QGuiApplication>
-#include <QJsonDocument>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
 #include <QQuickStyle>
@@ -13,6 +11,8 @@
 #include "levelpicker.h"
 #include "scorethingee.h"
 
+using namespace untitled;
+
 void testPicker(LevelPicker *picker, ScoreThingee *scores) {
   picker->setRead("Gen-1-1", .5);
   picker->setRead("Mat-19-16", 1);
@@ -20,7 +20,7 @@ void testPicker(LevelPicker *picker, ScoreThingee *scores) {
   picker->setRead("Mat-6-19", 1);
   picker->setRead("Acts-2-1", 1);
 
-  for (int i = 0; i < 10000; i++) {
+  for (int i = 0; i < 100; i++) {
     Score *picked = picker->pick();
 
     qDebug() << " picked: " << picked->getName() << " " << picked->getWeight()
@@ -45,7 +45,7 @@ int main(int argc, char *argv[]) {
 
 // root->setWindowState(Qt::WindowState::WindowFullScreen);
 
-#if WIN32
+#ifdef WIN32
   root->setWidth(800);
   root->setHeight(400);
   root->setPosition(-1360, 340);
@@ -73,9 +73,6 @@ int main(int argc, char *argv[]) {
 
   scoreThingee.readScores();
   scoreThingee.saveScores();
-
-  picker.setRead("testing", 123);
-  testPicker(&picker, &scoreThingee);
 
   return app.exec();
 }
