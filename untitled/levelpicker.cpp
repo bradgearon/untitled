@@ -3,11 +3,13 @@
 
 LevelPicker::LevelPicker(QJsonArray json) {
   size_t count = static_cast<size_t>(json.count());
-  this->levels = std::vector<Level *>(count);
-  this->scoreMap = std::map<QString, Score *>();
+  levels = std::vector<Level *>(count);
+  scoreMap = std::map<QString, Score *>();
 
   setLevelsAndScores(json);
 }
+
+std::map<QString, Score *> LevelPicker::getScoreMap() const { return scoreMap; }
 
 void LevelPicker::setLevelsAndScores(QJsonArray json) {
   size_t count = static_cast<size_t>(this->levels.size());
@@ -31,8 +33,11 @@ void LevelPicker::setRead(QString element, double read) {
     return;
   }
 
-  scoreMap[element]->setRead(read);
-  rebuild = true;
+  Score *thisScore = scoreMap[element];
+  if (thisScore->getRead() < read) {
+    thisScore->setRead(read);
+    rebuild = true;
+  }
 }
 
 Score *LevelPicker::getScore(QString element) {

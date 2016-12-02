@@ -49,7 +49,6 @@ Item {
                 background: null
             }
         }
-
     }
 
     Pane {
@@ -190,7 +189,6 @@ Item {
         horizontalAlignment: Text.AlignHCenter
         z: 10
         font.pixelSize: (height * .5)
-
     }
 
     Button {
@@ -201,8 +199,8 @@ Item {
         anchors.right: parent.right
         anchors.rightMargin: 7
 
-        // onLinkActivated: Qt.openUrlExternally(link)
 
+        // onLinkActivated: Qt.openUrlExternally(link)
         text: qsTr("Learn More...")
         highlighted: true
         bottomPadding: 20
@@ -210,26 +208,24 @@ Item {
         padding: 16
     }
 
-    states: State {
-        name: "horizontal"
-        when: page1.width > page1.height
+    states: [
+        State {
+            name: "horizontal"
+            when: page1.width > page1.height
 
-        PropertyChanges {
-            target: frame1
-            x: parent.width * .5
-            y: 0
-            width: parent.width * .5
-            height: parent.height
+            PropertyChanges {
+                target: frame1
+                x: parent.width * .5
+                y: 0
+                width: parent.width * .5
+                height: parent.height
+            }
+
+            PropertyChanges {
+                target: leftPane
+                width: frame1.x
+                height: parent.height
+            }
         }
-
-        PropertyChanges {
-            target: leftPane
-            width: frame1.x
-            height: parent.height
-        }
-
-    }
-
-
-
+    ]
 }

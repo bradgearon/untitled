@@ -11,74 +11,25 @@
 #include <functional>
 
 #include "levelpicker.h"
-#include <QtSql>
+#include "scorethingee.h"
 
-QJsonObject getCookieValue() {
+void testPicker(LevelPicker *picker, ScoreThingee *scores) {
+  picker->setRead("Gen-1-1", .5);
+  picker->setRead("Mat-19-16", 1);
+  picker->setRead("Luk-2-8", 1);
+  picker->setRead("Mat-6-19", 1);
+  picker->setRead("Acts-2-1", 1);
 
-  auto dbPath =
-#ifndef WIN32
-      QFileInfo(QDir::currentPath()).dir().absolutePath() + "/" +
-#endif
-      "app_webview/Cookies";
+  for (int i = 0; i < 10000; i++) {
+    Score *picked = picker->pick();
 
-  qDebug() << dbPath;
-  auto db = QSqlDatabase::addDatabase("QSQLITE");
-  db.setDatabaseName(dbPath);
+    qDebug() << " picked: " << picked->getName() << " " << picked->getWeight()
+             << " " << picked->getRank();
 
-  if (!db.open()) {
-    qDebug() << "error connecting ";
+    qDebug() << "before: " << time(0);
+    scores->saveScores();
+    qDebug() << "after: " << time(0);
   }
-
-  auto query =
-      db.exec(QString("select value from cookies where name = 'read'"));
-
-  QJsonObject valueJson;
-  QString value;
-
-  if (query.first()) {
-    auto valueBytes = query.value("value").toByteArray();
-    value = QUrl::fromPercentEncoding(valueBytes).remove(QChar('\\'));
-
-    valueJson = QJsonDocument::fromJson(value.toUtf8()).object();
-  }
-
-  db.close();
-  return valueJson;
-}
-
-void readCookies(LevelPicker picker) {
-  QSaveFile readFile("read.dat");
-  readFile.open(QIODevice::WriteOnly);
-  QDataStream readStream(&readFile);
-
-  auto cookieValue = getCookieValue();
-  auto keys = cookieValue.keys();
-  for (auto key : keys) {
-    auto read = cookieValue[key].toObject();
-    auto value = read["value"];
-    readStream << key << value.toDouble();
-
-    picker.setRead(key, value.toDouble());
-  }
-
-  readFile.commit();
-}
-
-void readSaveFile(LevelPicker picker) {
-  QFile readFile("read.dat");
-  readFile.open(QIODevice::ReadOnly);
-  QDataStream read(&readFile);
-  QString name;
-  double value;
-  while (!read.atEnd()) {
-    read >> name;
-    read >> value;
-    qDebug() << "name " << name << " value " << value;
-
-    picker.setRead(name, value);
-  }
-
-  readFile.close();
 }
 
 int main(int argc, char *argv[]) {
@@ -118,25 +69,13 @@ int main(int argc, char *argv[]) {
   auto model = json.toVariant();
   root->setProperty("model", model);
 
-  readCookies(picker);
-  readSaveFile(picker);
+  ScoreThingee scoreThingee = ScoreThingee(&picker);
+
+  scoreThingee.readScores();
+  scoreThingee.saveScores();
 
   picker.setRead("testing", 123);
+  testPicker(&picker, &scoreThingee);
 
   return app.exec();
-}
-
-void testPicker(LevelPicker picker) {
-  picker.setRead("Gen-1-1", .5);
-  picker.setRead("Mat-19-16", 1);
-  picker.setRead("Luk-2-8", 1);
-  picker.setRead("Mat-6-19", 1);
-  picker.setRead("Acts-2-1", 1);
-
-  for (int i = 0; i < 100; i++) {
-    Score *picked = picker.pick();
-
-    qDebug() << " picked: " << picked->getName() << " " << picked->getWeight()
-             << " " << picked->getRank();
-  }
 }

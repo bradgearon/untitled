@@ -22,5 +22,6 @@ public:
   void setRead(QString element, double read);
   Score *pick();
   Score *getScore(QString element);
+  std::map<QString, Score *> getScoreMap() const;
 };
 }
