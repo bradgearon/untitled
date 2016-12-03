@@ -2,13 +2,11 @@ QT += quick quickcontrols2 sql
 
 include(../main/common.pri)
 
-#todo: make sure this is ok
-QT -= network
-
 RESOURCES += qml.qrc
 
 LIBS += -L$$DESTDIR -lassets
 
+#no_include_pwd
 SOURCES += main.cpp \
     levelpicker.cpp \
     level.cpp \
@@ -25,4 +23,5 @@ HEADERS += \
     scorethingee.h \
     languagethingee.h \
     book.h
+
 

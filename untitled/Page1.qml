@@ -11,6 +11,7 @@ Page1Form {
         id: timer
         running: false
         repeat: true
+
         onTriggered: function() {
             if(timerCurrent++ < timerTotal) {
                 closeTimer.text = timerTotal - timerCurrent + '';
@@ -24,6 +25,9 @@ Page1Form {
     }
 
     onModelChanged: function() {
+        verse = "";
+        mainImage = "";
+
         if(!model) {
             return;
         }
