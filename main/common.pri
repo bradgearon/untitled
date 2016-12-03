@@ -1,5 +1,4 @@
 CONFIG += c++14
-CONFIG-=qml_debug
 
 linux: {
   PLATFORM = linux

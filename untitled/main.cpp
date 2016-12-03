@@ -69,6 +69,8 @@ int main(int argc, char *argv[]) {
 
   auto cultures = loadJson(":/data/culture.json");
   auto culture = cultures.object()[isoLang];
+
+  isoLang = "ar";
   qDebug() << culture;
 
   auto books = loadJson(":/data/books.json").array();
@@ -94,6 +96,7 @@ int main(int argc, char *argv[]) {
 
   auto defaultConfig = loadJson(":/data/config/default.json");
   auto config = loadJson(":/data/config/" + isoLang + ".json");
+  bool isRtl = config.object()["rtl"].toBool();
 
   auto configObj = config.object();
   auto defaultConfigObj = defaultConfig.object();
@@ -130,7 +133,9 @@ int main(int argc, char *argv[]) {
 
   auto testObject = testModel.object();
   testObject["imageName"] = imagePath;
+  testObject["isRtl"] = isRtl;
   root->setProperty("model", testObject.toVariantMap());
 
+  Q_CLEANUP_RESOURCE(assets);
   return app.exec();
 }

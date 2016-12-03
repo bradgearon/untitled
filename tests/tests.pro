@@ -18,7 +18,7 @@ for(object, TEST) {
   }
 }
 
-# LIBS += $$DESTDIR/untitled.$$EXT
+
 
 INCLUDEPATH += ../untitled
 

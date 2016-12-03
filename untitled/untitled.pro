@@ -23,5 +23,3 @@ HEADERS += \
     scorethingee.h \
     languagethingee.h \
     book.h
-
-

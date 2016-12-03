@@ -1,6 +1,6 @@
 import QtQuick 2.7
-import QtQuick.Controls 2.0
-import QtQuick.Controls.Material 2.0
+import QtQuick.Controls 2.1
+import QtQuick.Controls.Material 2.1
 
 Item {
     id: item1
@@ -9,7 +9,9 @@ Item {
     property alias flickable: flick
     property alias textArea: textArea1
     property alias close: close
+    property alias learnMore: learnMore
     property alias closeTimer: timer
+    property bool isRtl: isrtl
 
     Pane {
         id: leftPane
@@ -37,7 +39,7 @@ Item {
                 leftPadding: 14
                 topPadding: 14
                 bottomPadding: 14
-
+                horizontalAlignment: isRtl ? Text.AlignRight : Text.AlignLeft
                 textFormat: Text.AutoText
                 wrapMode: Text.Wrap
 
@@ -74,13 +76,15 @@ Item {
         id: close
         width: height - 10
         visible: false
-        anchors.top: parent.top
-        anchors.topMargin: 6
-        anchors.right: parent.right
-        anchors.rightMargin: 12
-
         text: qsTr("X")
         Material.elevation: 1
+
+        x:7
+        anchors.topMargin: 8
+        anchors.rightMargin: 12
+        anchors.leftMargin: 12
+        anchors.top: parent.top
+
         opacity: .75
         z: 10
         font.pixelSize: (height * .35)
@@ -89,8 +93,8 @@ Item {
     Text {
         id: timer
         color: "#6d6d6d"
-        anchors.fill: close
         text: '5'
+        anchors.fill: close
         verticalAlignment: Text.AlignVCenter
         horizontalAlignment: Text.AlignHCenter
         z: 10
@@ -100,13 +104,15 @@ Item {
     Button {
         id: learnMore
         z: 10
-        anchors.bottom: parent.bottom
-        anchors.bottomMargin: 7
-        anchors.right: parent.right
         anchors.rightMargin: 7
+        anchors.leftMargin: 7
+        anchors.bottomMargin: 7
+        anchors.bottom: parent.bottom
 
         // onLinkActivated: Qt.openUrlExternally(link)
         text: qsTr("Learn More...")
+
+        x:7
         highlighted: true
         bottomPadding: 20
         topPadding: 20
@@ -115,8 +121,28 @@ Item {
 
     states: [
         State {
+            name: "horizontalFlipped"
+            when: page1.width > page1.height && isRtl
+
+            PropertyChanges {
+                target: frame1
+
+                y: 0
+                width: parent.width * .5
+                height: parent.height
+            }
+
+            PropertyChanges {
+                target: leftPane
+                x: parent.width * .5
+                width: frame1.width
+                height: parent.height
+            }
+        },
+
+        State {
             name: "horizontal"
-            when: page1.width > page1.height
+            when: page1.width > page1.height && !isRtl
 
             PropertyChanges {
                 target: frame1
