@@ -5,7 +5,23 @@ Page1Form {
     property var model
     property int timerTotal: 5
     property int timerCurrent: 0
-    property bool isrtl: true
+    property bool isRtl: true
+
+    learnMoreX: {
+        if(isRtl) {
+            return 12;
+        } else {
+            return parent.width - width - 12
+        }
+    }
+
+    closeX: {
+        if(isRtl) {
+            return 12;
+        } else {
+            return parent.width - width - 12
+        }
+    }
 
     Timer {
         id: timer
@@ -34,10 +50,9 @@ Page1Form {
         }
 
         timer.start();
-
-
-
         isRtl = model.isRtl;
+
+
         verse = model.verse;
         mainImage = model.imageName;
     }
@@ -88,48 +103,6 @@ Page1Form {
 
     }
 
-    states: [
-    State {
-        name: "ltr"
-        when: !isrtl
-
-        onCompleted: function() {
-           console.log("not rtl");
-        }
-
-
-        AnchorChanges {
-            target: close
-            anchors.left: undefined
-            anchors.right: parent.right
-        }
-
-        AnchorChanges {
-            target: learnMore
-            anchors.left: undefined
-            anchors.right: parent.right
-        }
-    },
-
-    State {
-        name: "rtl"
-        when: isrtl
-        onCompleted: function() {
-           console.log("rtl");
-        }
-
-        AnchorChanges {
-            target: close
-            anchors.left: parent.left
-            anchors.right: undefined
-        }
-
-        AnchorChanges {
-            target: learnMore
-            anchors.left: parent.left
-            anchors.right: undefined
-        }
-    }]
 
 }
 

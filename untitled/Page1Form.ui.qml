@@ -11,7 +11,8 @@ Item {
     property alias close: close
     property alias learnMore: learnMore
     property alias closeTimer: timer
-    property bool isRtl: isrtl
+    property alias learnMoreX: learnMore.x
+    property alias closeX: close.x
 
     Pane {
         id: leftPane
@@ -34,7 +35,14 @@ Item {
             TextArea {
                 id: textArea1
 
+                    Text {
+                        text: "test"
+                    }
+
+
+
                 anchors.fill: parent
+
                 rightPadding: 15
                 leftPadding: 14
                 topPadding: 14
@@ -42,11 +50,10 @@ Item {
                 horizontalAlignment: isRtl ? Text.AlignRight : Text.AlignLeft
                 textFormat: Text.AutoText
                 wrapMode: Text.Wrap
+                font.pixelSize: 22
 
-                font.pixelSize: 18
                 text: "<big><b>This is some text</b></big><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel massa a tortor suscipit tincidunt nec malesuada nunc. Aenean porta tortor et eros tempor, venenatis blandit magna egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce tincidunt massa dui, in condimentum elit blandit ac. Nulla tempor vel nunc at pellentesque. Aenean luctus justo quam, nec ultricies nulla auctor et. Proin eleifend velit sed interdum rutrum. Maecenas sed bibendum nisl, non vestibulum ligula. Integer in vulputate odio. In vitae feugiat ex. Duis nec ligula at tortor vulputate facilisis. Sed aliquam lorem at nibh suscipit rutrum. Aliquam quis ex est. Donec et feugiat odio, eu semper nulla. Sed auctor et lacus in imperdiet. Aliquam et ornare ante. Maecenas suscipit fringilla orci. Praesent elementum mi mauris, eu pretium mauris efficitur vitae. Nulla suscipit ligula in eros congue fermentum. Aliquam ultrices, mi quis sagittis gravida, libero odio ultricies arcu, quis pretium dolor est nec ligula. Nunc porttitor ligula non nisl volutpat ultrices. Etiam eget leo et mi volutpat bibendum quis at est."
-
-                font.family: "Roboto"
+                font.family: "Amiko"
 
                 readOnly: true
                 background: null
@@ -74,14 +81,13 @@ Item {
 
     Button {
         id: close
+        x: 590
         width: height - 10
         visible: false
         text: qsTr("X")
         Material.elevation: 1
 
-        x:7
         anchors.topMargin: 8
-        anchors.rightMargin: 12
         anchors.leftMargin: 12
         anchors.top: parent.top
 
@@ -103,16 +109,11 @@ Item {
 
     Button {
         id: learnMore
+        x: 505
         z: 10
-        anchors.rightMargin: 7
-        anchors.leftMargin: 7
-        anchors.bottomMargin: 7
         anchors.bottom: parent.bottom
-
-        // onLinkActivated: Qt.openUrlExternally(link)
+        anchors.bottomMargin: 7
         text: qsTr("Learn More...")
-
-        x:7
         highlighted: true
         bottomPadding: 20
         topPadding: 20
@@ -120,6 +121,7 @@ Item {
     }
 
     states: [
+
         State {
             name: "horizontalFlipped"
             when: page1.width > page1.height && isRtl

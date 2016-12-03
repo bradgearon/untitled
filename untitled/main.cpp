@@ -1,5 +1,6 @@
 #include <QDebug>
 #include <QDesktopServices>
+#include <QFontDatabase>
 #include <QGuiApplication>
 #include <QQmlApplicationEngine>
 #include <QQmlContext>
@@ -48,6 +49,12 @@ int main(int argc, char *argv[]) {
 
   QGuiApplication app(argc, argv);
   QQmlApplicationEngine engine;
+
+  int id = QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
+  QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
+  QFontDatabase::addApplicationFont(":/fonts/opensans.ttf");
+  QString family = QFontDatabase::applicationFontFamilies(id).at(0);
+  qDebug() << "font: " << family;
 
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
