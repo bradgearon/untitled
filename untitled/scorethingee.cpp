@@ -1,4 +1,5 @@
 #include "scorethingee.h"
+using namespace untitled;
 
 ScoreThingee::ScoreThingee(LevelPicker *picker) {
   this->picker = picker;
@@ -6,12 +7,14 @@ ScoreThingee::ScoreThingee(LevelPicker *picker) {
 }
 
 QJsonObject ScoreThingee::getCookieValue() {
-#if !WIN32
+
+#ifndef WIN32
   auto appData =
       QStandardPaths::standardLocations(QStandardPaths::AppDataLocation)[0];
 #else
   auto appData = QCoreApplication::applicationDirPath();
 #endif
+
   auto dbPath =
       QFileInfo(appData).dir().absolutePath() + "/app_webview/Cookies";
   qDebug() << dbPath;

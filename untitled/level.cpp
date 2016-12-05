@@ -1,4 +1,5 @@
 #include "level.h"
+using namespace untitled;
 
 Level::Level(QObject *parent) : QObject(parent) {}
 

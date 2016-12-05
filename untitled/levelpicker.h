@@ -2,6 +2,7 @@
 #include "models.h"
 
 namespace untitled {
+
 class LevelPicker {
 protected:
   std::vector<std::unique_ptr<Level>> levels;

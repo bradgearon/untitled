@@ -2,6 +2,7 @@
 #define BOOK_H
 
 #include "models.h"
+namespace untitled {
 
 class Book : QObject {
   Q_OBJECT
@@ -26,5 +27,5 @@ private:
   QString name;
   QString abbr;
 };
-
+}
 #endif // BOOK_H

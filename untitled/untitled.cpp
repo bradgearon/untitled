@@ -1,18 +1,13 @@
-#include <QDebug>
-#include <QDesktopServices>
-#include <QFontDatabase>
-#include <QGuiApplication>
-#include <QQmlApplicationEngine>
-#include <QQmlContext>
-#include <QQuickStyle>
-#include <QWindow>
-#include <QtCore>
-#include <functional>
+#include "untitled.h"
+#include <future>
 
+#include "form1viewmodel.h"
 #include "levelpicker.h"
 #include "scorethingee.h"
 
 using namespace untitled;
+
+// static JavaVM *g_VM;
 
 void testPicker(LevelPicker *picker, ScoreThingee *scores) {
   picker->setRead("Gen-1-1", .5);
@@ -41,8 +36,23 @@ QJsonDocument loadJson(QString path) {
   return json;
 }
 
-int main(int argc, char *argv[]) {
+int untitled_start(int argc, char *argv[]) {
+  qDebug() << "running ";
   Q_INIT_RESOURCE(assets);
+  QByteArray ba;
+  int n = 1;
+  ba.setNum(n);
+  qputenv("QML_IMPORT_TRACE", ba);
+// JNI_OnLoad
+
+#if ANDROID
+// QLibrary platform("libplugins_platforms_android_libqtforandroid");
+
+// QFileInfo platformFile(platform.fileName());
+// auto pluginPath = platformFile.absolutePath();
+// qputenv("QT_QPA_PLATFORM_PLUGIN_PATH", pluginPath.toUtf8());
+// qDebug() << "QT_QPA_PLATFORM_PLUGIN_PATH: " << pluginPath;
+#endif
 
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QQuickStyle::setStyle("Material");
@@ -50,17 +60,12 @@ int main(int argc, char *argv[]) {
   QGuiApplication app(argc, argv);
   QQmlApplicationEngine engine;
 
-  int id = QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
+  QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
-  QFontDatabase::addApplicationFont(":/fonts/opensans.ttf");
-  QString family = QFontDatabase::applicationFontFamilies(id).at(0);
-  qDebug() << "font: " << family;
 
   engine.load(QUrl(QLatin1String("qrc:/main.qml")));
 
   QWindow *root = qobject_cast<QWindow *>(engine.rootObjects().first());
-
-// root->setWindowState(Qt::WindowState::WindowFullScreen);
 
 #ifdef WIN32
   root->setWidth(800);
@@ -68,6 +73,7 @@ int main(int argc, char *argv[]) {
   root->setPosition(-1360, 340);
 #endif
 
+  qDebug() << "loading levels ";
   auto levels = loadJson(":/data/level.json");
   LevelPicker picker(levels.array());
 
@@ -77,8 +83,7 @@ int main(int argc, char *argv[]) {
   auto cultures = loadJson(":/data/culture.json");
   auto culture = cultures.object()[isoLang];
 
-  isoLang = "ar";
-  qDebug() << culture;
+  qDebug() << culture << " for lang " << isoLang << " " << locale;
 
   auto books = loadJson(":/data/books.json").array();
   auto bookMap = std::map<QString, Book *>();
@@ -101,9 +106,13 @@ int main(int argc, char *argv[]) {
     }
   }
 
+  // books obj used for to get version and build learn more url
+  // it uses config
+
+  //
+
   auto defaultConfig = loadJson(":/data/config/default.json");
   auto config = loadJson(":/data/config/" + isoLang + ".json");
-  bool isRtl = config.object()["rtl"].toBool();
 
   auto configObj = config.object();
   auto defaultConfigObj = defaultConfig.object();
@@ -133,16 +142,37 @@ int main(int argc, char *argv[]) {
     version = versionObj.toString();
   }
 
+  bool isRtl = configObj["rtl"].toBool();
+  qDebug() << "rtl: " << isRtl;
+
   auto path = ":/data/word/" + picked->getName() + "/" + version + ".json";
   auto imagePath = "images/" + picked->getName() + ".jpg";
 
   auto testModel = loadJson(path);
+  auto viewModel = std::make_unique<Form1ViewModel>(testModel.object());
 
-  auto testObject = testModel.object();
-  testObject["imageName"] = imagePath;
-  testObject["isRtl"] = isRtl;
-  root->setProperty("model", testObject.toVariantMap());
+  viewModel->setIsRtl(isRtl);
+  viewModel->setImageName(imagePath);
+  root->setProperty("model", QVariant::fromValue(viewModel.get()));
 
+  // todo: this is the controller?
+  QObject::connect(viewModel.get(), &Form1ViewModel::close, [&root] {
+    root->hide();
+    using namespace std::chrono_literals;
+    std::this_thread::sleep_for(5s);
+    root->show();
+  });
+
+  QObject::connect(viewModel.get(), &Form1ViewModel::show,
+                   [&] { qDebug() << "on show"; });
+
+  QObject::connect(viewModel.get(), &Form1ViewModel::read,
+                   [&](auto value) { qDebug() << "on read" << value; });
+
+  QObject::connect(viewModel.get(), &Form1ViewModel::learnMore,
+                   [&] { qDebug() << "on learn more"; });
+
+  const int result = app.exec();
   Q_CLEANUP_RESOURCE(assets);
-  return app.exec();
+  return result;
 }

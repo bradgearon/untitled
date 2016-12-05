@@ -1,4 +1,4 @@
-QT += core sql
+QT += quick quickcontrols2 sql
 
 TARGET = tests
 

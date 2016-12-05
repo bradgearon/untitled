@@ -1,4 +1,5 @@
 #include "book.h"
+using namespace untitled;
 
 Book::Book(QObject *parent) : QObject(parent) {}
 

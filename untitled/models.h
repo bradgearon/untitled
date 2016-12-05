@@ -1,25 +1,34 @@
 #pragma once
 
-#include <chrono>
-#include <memory>
+namespace untitled {
+class Level;
+class Score;
+}
+
+#include <QDebug>
+
+#include <QDesktopServices>
+#include <QFontDatabase>
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
+#include <QQmlContext>
+#include <QQuickStyle>
+#include <QWindow>
+#include <QtCore>
 
 #include <QDataStream>
-#include <QDebug>
 #include <QJsonArray>
 #include <QJsonObject>
 #include <QObject>
 #include <QSaveFile>
 #include <QtSql>
 
-namespace untitled {
-class Level;
-class Score;
-}
+#include <chrono>
+#include <functional>
+#include <memory>
 
 #include "level.h"
 #include "score.h"
 
 #include "book.h"
 #include "levelpicker.h"
-
-using namespace untitled;

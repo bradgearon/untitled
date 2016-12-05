@@ -2,7 +2,8 @@ TEMPLATE = subdirs
 
 SUBDIRS = \
   ../assets \
-  ../untitled
+  ../untitled \
+    ../app
 
 win32: {
   SUBDIRS += ../tests
@@ -10,3 +11,5 @@ win32: {
 
 untitled.depends = assets
 tests.depends = untitled
+app.depends = untitled
+

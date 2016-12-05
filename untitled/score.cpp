@@ -1,4 +1,5 @@
 #include "score.h"
+using namespace untitled;
 
 Score::Score(Level *level) : QObject() {
   qDebug() << "creating score";

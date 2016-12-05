@@ -11,7 +11,7 @@ Page1Form {
         if(isRtl) {
             return 12;
         } else {
-            return parent.width - width - 12
+            return this.width - 12 - learnMore.width
         }
     }
 
@@ -19,7 +19,7 @@ Page1Form {
         if(isRtl) {
             return 12;
         } else {
-            return parent.width - width - 12
+            return  this.width - 12 - close.width
         }
     }
 
@@ -50,21 +50,32 @@ Page1Form {
         }
 
         timer.start();
-        isRtl = model.isRtl;
-
 
         verse = model.verse;
+        isRtl = model.isRtl;
         mainImage = model.imageName;
+        model.onShow();
     }
 
     close.onClicked: function() {
-        main.close();
+        console.log("model.onclosed");
+        model.onClose();
+    }
+
+    learnMore.onClicked: function() {
+        model.onLearnMore();
     }
 
     onWidthChanged: function() {
         if(width > height) {
             close.opacity = .75;
             closeTimer.opacity = .75;
+        }
+    }
+
+    flickable.onAtYEndChanged: function() {
+        if(flickable.atYEnd) {
+            model.onRead(.5);
         }
     }
 
@@ -102,7 +113,6 @@ Page1Form {
         }
 
     }
-
 
 }
 

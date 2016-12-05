@@ -1,11 +1,16 @@
 #ifndef LANGUAGETHINGEE_H
 #define LANGUAGETHINGEE_H
 
+#include "models.h"
+
+namespace untitled {
+
 class LanguageThingee {
 public:
-  LanguageThingee();
+  LanguageThingee(/* configObj */);
+  QString getElementPath();
 
 private:
 };
-
+}
 #endif // LANGUAGETHINGEE_H
