@@ -1,5 +1,7 @@
 #include "untitled.h"
 #include <QOffScreenSurface>
+#include <QQuickItem>
+#include <QtQuickWidgets/QQuickWidget>
 #include <future>
 #include <qquickview.h>
 
@@ -58,18 +60,20 @@ int untitled_start(int argc, char *argv[]) {
 #endif
 
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
+
   QQuickStyle::setStyle("Material");
   QQuickWindow::setDefaultAlphaBuffer(true);
 
   QGuiApplication app(argc, argv);
-  QQmlApplicationEngine engine;
 
   QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
 
-  engine.load(QUrl(QLatin1String("qrc:/main.qml")));
+  auto root = std::make_unique<QQuickView>();
+  root->setFlags(Qt::FramelessWindowHint);
 
-  QWindow *root = qobject_cast<QWindow *>(engine.rootObjects().first());
+  root->setOpacity(.75);
+  root->setSource(QUrl(QLatin1String("qrc:/main.qml")));
 
 #ifdef WIN32
   root->setWidth(800);
@@ -162,7 +166,11 @@ int untitled_start(int argc, char *argv[]) {
   QObject::connect(picked, &Score::readChanged,
                    [&scoreThingee] { scoreThingee->saveScores(); });
 
-  root->setProperty("model", QVariant::fromValue(viewModel.get()));
+  QQuickItem *rootObject = root->rootObject();
+  rootObject->setProperty("model", QVariant::fromValue(viewModel.get()));
+
+  std::promise<void> whenShow;
+  auto then = whenShow.get_future();
 
   // todo: this is the controller?
   QObject::connect(viewModel.get(), &Form1ViewModel::close, [&root] {
@@ -172,15 +180,20 @@ int untitled_start(int argc, char *argv[]) {
     root->show();
   });
 
-  QObject::connect(viewModel.get(), &Form1ViewModel::show,
-                   [&] { qDebug() << "on show"; });
+  QObject::connect(viewModel.get(), &Form1ViewModel::ready, [&root, &whenShow] {
+    qDebug() << "on show from untitled";
+    QMetaObject::invokeMethod(root.get(), "show", Qt::QueuedConnection);
+    whenShow.set_value();
+  });
 
-  QObject::connect(viewModel.get(), &Form1ViewModel::read,
-                   [&](auto value) { qDebug() << "on read" << value; });
+  QObject::connect(viewModel.get(), &Form1ViewModel::read, [&](auto value) {
+    qDebug() << "on read from untitled " << value;
+  });
 
   QObject::connect(viewModel.get(), &Form1ViewModel::learnMore,
-                   [&] { qDebug() << "on learn more"; });
+                   [&] { qDebug() << "on learn more from untitled"; });
 
+  then.wait();
   const int result = app.exec();
   Q_CLEANUP_RESOURCE(assets);
   return result;

@@ -48,7 +48,7 @@ void untitled::Form1ViewModel::onClose() {
   qDebug() << " on close";
 }
 
-void untitled::Form1ViewModel::onShow() {
-  emit show();
-  qDebug() << " on show";
+void untitled::Form1ViewModel::onReady() {
+  qDebug() << " form1viewmodel on show ";
+  std::thread([&] { emit ready(); }).detach();
 }

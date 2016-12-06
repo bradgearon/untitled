@@ -6,6 +6,7 @@ Page1Form {
     property int timerTotal: 5
     property int timerCurrent: 0
     property bool isRtl: true
+    anchors.fill: parent
 
     learnMoreX: {
         if(isRtl) {
@@ -54,7 +55,8 @@ Page1Form {
         verse = model.verse;
         isRtl = model.isRtl;
         mainImage = model.imageName;
-        model.onShow();
+
+        model.onReady();
     }
 
     close.onClicked: function() {
@@ -68,8 +70,9 @@ Page1Form {
         if(!model) {
             return;
         }
-        model.onLearnMore();
+
         model.onRead(1.0);
+        model.onLearnMore();
     }
 
     onWidthChanged: function() {
@@ -80,7 +83,8 @@ Page1Form {
     }
 
     flickable.onAtYEndChanged: function() {
-        if(!model) {
+        if(!model || flickable.height === 0
+                || textArea.height < flickable.height) {
             return;
         }
 

@@ -49,13 +49,13 @@ signals:
   void close();
   void learnMore();
   void read(double value);
-  void show();
+  void ready();
 
 public slots:
   void onRead(double value);
   void onLearnMore();
   void onClose();
-  void onShow();
+  void onReady();
 };
 }
 #endif // FORM1VIEWMODEL_H

@@ -40,7 +40,6 @@ double Level::getReadTotal() {
   double total = std::accumulate(scores.begin(), scores.end(), 0.0,
                                  [](double sum, auto &&score) {
                                    auto current = sum + score->getRead();
-                                   qDebug() << current;
                                    return current;
                                  });
   qDebug() << " total read: " << total;

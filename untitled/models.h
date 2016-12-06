@@ -25,6 +25,7 @@ class Score;
 
 #include <chrono>
 #include <functional>
+#include <future>
 #include <memory>
 
 #include "level.h"

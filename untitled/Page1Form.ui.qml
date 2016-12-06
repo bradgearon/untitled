@@ -3,6 +3,7 @@ import QtQuick.Controls 2.1
 import QtQuick.Controls.Material 2.1
 
 Item {
+    anchors.fill: parent
     id: item1
     property alias mainImage: image1.source
     property alias verse: textArea1.text
