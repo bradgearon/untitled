@@ -4,7 +4,6 @@ import QtQuick.Controls 2.1
 Rectangle {
     id: main
     anchors.fill: parent
-    color: "#00FFFFFF"
     visible: true
     property var model
 

@@ -14,6 +14,7 @@ Item {
     property alias closeTimer: timer
     property alias learnMoreX: learnMore.x
     property alias closeX: close.x
+    property alias image1: image1
 
     Pane {
         id: leftPane

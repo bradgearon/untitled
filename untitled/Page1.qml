@@ -55,8 +55,12 @@ Page1Form {
         verse = model.verse;
         isRtl = model.isRtl;
         mainImage = model.imageName;
+    }
 
-        model.onReady();
+    image1.onStatusChanged: function(status) {
+        if(image1.status === Image.Ready) {
+            model.onReady();
+        }
     }
 
     close.onClicked: function() {

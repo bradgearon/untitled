@@ -1,7 +1,5 @@
 #include "untitled.h"
-#include <QOffScreenSurface>
 #include <QQuickItem>
-#include <QtQuickWidgets/QQuickWidget>
 #include <future>
 #include <qquickview.h>
 
@@ -69,10 +67,12 @@ int untitled_start(int argc, char *argv[]) {
   QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
 
-  auto root = std::make_unique<QQuickView>();
-  root->setFlags(Qt::FramelessWindowHint);
+  QFont roboto("Roboto", 12, QFont::Normal, false);
+  app.setFont(roboto);
 
-  root->setOpacity(.75);
+  auto root = std::make_unique<QQuickView>();
+
+  root->setFlags(Qt::FramelessWindowHint);
   root->setSource(QUrl(QLatin1String("qrc:/main.qml")));
 
 #ifdef WIN32
@@ -163,15 +163,6 @@ int untitled_start(int argc, char *argv[]) {
   viewModel->setImageName(imagePath);
   viewModel->setScore(picked);
 
-  QObject::connect(picked, &Score::readChanged,
-                   [&scoreThingee] { scoreThingee->saveScores(); });
-
-  QQuickItem *rootObject = root->rootObject();
-  rootObject->setProperty("model", QVariant::fromValue(viewModel.get()));
-
-  std::promise<void> whenShow;
-  auto then = whenShow.get_future();
-
   // todo: this is the controller?
   QObject::connect(viewModel.get(), &Form1ViewModel::close, [&root] {
     root->hide();
@@ -180,10 +171,12 @@ int untitled_start(int argc, char *argv[]) {
     root->show();
   });
 
-  QObject::connect(viewModel.get(), &Form1ViewModel::ready, [&root, &whenShow] {
+  QObject::connect(picked, &Score::readChanged,
+                   [&scoreThingee] { scoreThingee->saveScores(); });
+
+  QObject::connect(viewModel.get(), &Form1ViewModel::ready, [&root] {
     qDebug() << "on show from untitled";
-    QMetaObject::invokeMethod(root.get(), "show", Qt::QueuedConnection);
-    whenShow.set_value();
+    root->show();
   });
 
   QObject::connect(viewModel.get(), &Form1ViewModel::read, [&](auto value) {
@@ -193,7 +186,9 @@ int untitled_start(int argc, char *argv[]) {
   QObject::connect(viewModel.get(), &Form1ViewModel::learnMore,
                    [&] { qDebug() << "on learn more from untitled"; });
 
-  then.wait();
+  QQuickItem *rootObject = root->rootObject();
+  rootObject->setProperty("model", QVariant::fromValue(viewModel.get()));
+
   const int result = app.exec();
   Q_CLEANUP_RESOURCE(assets);
   return result;
