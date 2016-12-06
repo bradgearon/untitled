@@ -12,6 +12,7 @@ protected:
 private:
   std::default_random_engine gen;
   std::piecewise_constant_distribution<> random;
+  QMetaObject::Connection pickedConnection;
 
   bool rebuild = true;
 
@@ -24,5 +25,6 @@ public:
   Score *pick();
   Score *getScore(QString element);
   std::map<QString, Score *> getScoreMap() const;
+  void setReset();
 };
 }

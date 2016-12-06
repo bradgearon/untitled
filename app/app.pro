@@ -16,8 +16,8 @@ DEPENDPATH += ../untitled
 SOURCES += \
     main.cpp
 
+win32:RESOURCES += ../untitled/qml.qrc
+
 DISTFILES += \
     empty.qml
-
-RESOURCES += ../untitled/qml.qrc
 

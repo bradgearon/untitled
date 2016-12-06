@@ -8,6 +8,7 @@ include(../main/common.pri)
 LIBS += -L$$DESTDIR -lassets
 
 DEFINES += UNTITLED_LIB
+android:RESOURCES += qml.qrc
 
 #no_include_pwd
 SOURCES += \

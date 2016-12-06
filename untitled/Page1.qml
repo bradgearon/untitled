@@ -58,12 +58,18 @@ Page1Form {
     }
 
     close.onClicked: function() {
-        console.log("model.onclosed");
+        if(!model) {
+            return;
+        }
         model.onClose();
     }
 
     learnMore.onClicked: function() {
+        if(!model) {
+            return;
+        }
         model.onLearnMore();
+        model.onRead(1.0);
     }
 
     onWidthChanged: function() {
@@ -74,6 +80,10 @@ Page1Form {
     }
 
     flickable.onAtYEndChanged: function() {
+        if(!model) {
+            return;
+        }
+
         if(flickable.atYEnd) {
             model.onRead(.5);
         }

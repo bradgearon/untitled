@@ -4,7 +4,6 @@ using namespace untitled;
 Score::Score(Level *level) : QObject() {
   qDebug() << "creating score";
   this->level = level;
-  connect(this, &Score::readChanged, &Score::onReadChanged);
 }
 
 QString Score::getName() const { return name; }
@@ -22,15 +21,19 @@ void Score::setWeight(double value) { weight = value; }
 double Score::getRead() const { return read; }
 
 void Score::setRead(double read) {
-  this->read = read;
-  emit readChanged(read);
+  auto previous = this->read;
+  qDebug() << "read: " << read << " previous: " << previous;
+  if (read > previous) {
+    this->read = read;
+    onReadChanged(read, previous);
+  }
 }
 
 double Score::getNextDifference() const { return nextDifference; }
 
 void Score::setNextDifference(double value) { nextDifference = value; }
 
-void Score::onReadChanged(double read) {
+void Score::onReadChanged(double read, double previous) {
   double readTotal = level->getReadTotal();
   auto count = level->getScores().size();
   auto percentComplete = readTotal / count;
@@ -47,4 +50,9 @@ void Score::onReadChanged(double read) {
   qDebug() << "weight for element " << getName() << " now " << getWeight()
            << " in rank " << getRank() << " read " << readTotal
            << " percent complete: " << percentComplete;
+
+  if (read > previous) {
+    qDebug() << "read: " << read << " previous: " << previous;
+    emit readChanged(read);
+  }
 }

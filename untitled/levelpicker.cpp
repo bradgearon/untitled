@@ -11,6 +11,8 @@ LevelPicker::LevelPicker(QJsonArray json) {
 
 std::map<QString, Score *> LevelPicker::getScoreMap() const { return scoreMap; }
 
+void LevelPicker::setReset() { rebuild = true; }
+
 void LevelPicker::setLevelsAndScores(QJsonArray json) {
   size_t count = static_cast<size_t>(this->levels.size());
 
@@ -20,7 +22,7 @@ void LevelPicker::setLevelsAndScores(QJsonArray json) {
     double nextRank = 0;
     this->levels[i] = std::make_unique<Level>(json[ii].toObject(), nextRank);
 
-    for (auto &score : this->levels[i]->getScores()) {
+    for (const auto &score : this->levels[i]->getScores()) {
       if (this->scoreMap[score->getName()] == NULL) {
         this->scoreMap[score->getName()] = score.get();
       }
@@ -34,10 +36,7 @@ void LevelPicker::setRead(QString element, double read) {
   }
 
   Score *thisScore = scoreMap[element];
-  if (thisScore->getRead() < read) {
-    thisScore->setRead(read);
-    rebuild = true;
-  }
+  thisScore->setRead(read);
 }
 
 Score *LevelPicker::getScore(QString element) {
@@ -79,6 +78,10 @@ void LevelPicker::rebuildRandom() {
 }
 
 Score *LevelPicker::pick() {
+  if (pickedConnection) {
+    QObject::disconnect(pickedConnection);
+  }
+
   if (rebuild) {
     rebuildRandom();
     rebuild = false;
@@ -86,5 +89,9 @@ Score *LevelPicker::pick() {
 
   double picked = random(gen);
   qDebug() << " picked " << picked;
-  return scores[static_cast<size_t>(picked)];
+
+  const auto score = scores[static_cast<size_t>(picked)];
+  QObject::connect(score, &Score::readChanged, [this]() { this->setReset(); });
+
+  return score;
 }

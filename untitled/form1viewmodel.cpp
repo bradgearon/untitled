@@ -34,6 +34,7 @@ void Form1ViewModel::setScore(Score *value) { score = value; }
 
 void untitled::Form1ViewModel::onRead(double value) {
   emit read(value);
+  score->setRead(value);
   qDebug() << "onRead: " << value;
 }
 

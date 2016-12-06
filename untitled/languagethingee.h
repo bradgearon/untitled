@@ -9,6 +9,7 @@ class LanguageThingee {
 public:
   LanguageThingee(/* configObj */);
   QString getElementPath();
+  QString getLearnMorePath();
 
 private:
 };

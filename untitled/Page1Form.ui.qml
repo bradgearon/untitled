@@ -55,16 +55,17 @@ Item {
         }
     }
 
-    Pane {
+    Flickable {
         id: frame1
         y: parent.height * .5
         height: parent.height - parent.height * .5
         z: 5
         width: parent.width
-        padding: 0
+        contentWidth: image1.width
+        contentHeight: image1.height
+        boundsBehavior: Flickable.StopAtBounds
 
         Image {
-            z: 5
             id: image1
             width: frame1.width
             height: frame1.height

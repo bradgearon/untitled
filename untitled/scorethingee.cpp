@@ -56,6 +56,7 @@ void ScoreThingee::readSave() {
   QFile readFile("read.dat");
   readFile.open(QIODevice::ReadOnly);
   QDataStream read(&readFile);
+  qDebug() << "opened read dat";
   QString name;
   double value;
   while (!read.atEnd()) {

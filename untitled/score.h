@@ -25,7 +25,7 @@ public:
   void setNextDifference(double value);
 
 public slots:
-  void onReadChanged(double read);
+  void onReadChanged(double read, double previous = 0);
 
 signals:
   void readChanged(double read);

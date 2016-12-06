@@ -1,5 +1,7 @@
 #include "untitled.h"
+#include <QOffScreenSurface>
 #include <future>
+#include <qquickview.h>
 
 #include "form1viewmodel.h"
 #include "levelpicker.h"
@@ -37,6 +39,7 @@ QJsonDocument loadJson(QString path) {
 }
 
 int untitled_start(int argc, char *argv[]) {
+
   qDebug() << "running ";
   Q_INIT_RESOURCE(assets);
   QByteArray ba;
@@ -56,6 +59,7 @@ int untitled_start(int argc, char *argv[]) {
 
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
   QQuickStyle::setStyle("Material");
+  QQuickWindow::setDefaultAlphaBuffer(true);
 
   QGuiApplication app(argc, argv);
   QQmlApplicationEngine engine;
@@ -153,6 +157,11 @@ int untitled_start(int argc, char *argv[]) {
 
   viewModel->setIsRtl(isRtl);
   viewModel->setImageName(imagePath);
+  viewModel->setScore(picked);
+
+  QObject::connect(picked, &Score::readChanged,
+                   [&scoreThingee] { scoreThingee->saveScores(); });
+
   root->setProperty("model", QVariant::fromValue(viewModel.get()));
 
   // todo: this is the controller?
