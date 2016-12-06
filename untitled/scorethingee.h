@@ -1,6 +1,6 @@
-#ifndef SCORETHINGEE_H
-#define SCORETHINGEE_H
-#include "models.h"
+#pragma once
+
+#include "levelpicker.h"
 
 namespace untitled {
 
@@ -20,4 +20,3 @@ public:
   void readScores();
 };
 }
-#endif // SCORETHINGEE_H

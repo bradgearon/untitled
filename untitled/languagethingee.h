@@ -1,5 +1,4 @@
-#ifndef LANGUAGETHINGEE_H
-#define LANGUAGETHINGEE_H
+#pragma once
 
 #include "models.h"
 
@@ -7,11 +6,10 @@ namespace untitled {
 
 class LanguageThingee {
 public:
-  LanguageThingee(/* configObj */);
-  QString getElementPath();
-  QString getLearnMorePath();
+  LanguageThingee();
+  void setConfig(QString language);
+  Element getElementByName(QString name);
 
 private:
 };
 }
-#endif // LANGUAGETHINGEE_H

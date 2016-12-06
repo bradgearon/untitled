@@ -19,7 +19,8 @@ SOURCES += \
     languagethingee.cpp \
     book.cpp \
     untitled.cpp \
-    form1viewmodel.cpp
+    form1viewmodel.cpp \
+    element.cpp
 
 HEADERS += \
     levelpicker.h \
@@ -30,7 +31,8 @@ HEADERS += \
     languagethingee.h \
     book.h \
     untitled.h \
-    form1viewmodel.h
+    form1viewmodel.h \
+    element.h
 
 
 # delrcc =$$system_path($$absolute_path($$RCC_DIR)/qrc_qml.*)

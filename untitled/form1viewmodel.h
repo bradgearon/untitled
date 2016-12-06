@@ -1,5 +1,4 @@
-#ifndef FORM1VIEWMODEL_H
-#define FORM1VIEWMODEL_H
+#pragma once
 
 #include "models.h"
 namespace untitled {
@@ -58,4 +57,3 @@ public slots:
   void onReady();
 };
 }
-#endif // FORM1VIEWMODEL_H

@@ -1,5 +1,4 @@
-#ifndef BOOK_H
-#define BOOK_H
+#pragma once
 
 #include "models.h"
 namespace untitled {
@@ -28,4 +27,3 @@ private:
   QString abbr;
 };
 }
-#endif // BOOK_H

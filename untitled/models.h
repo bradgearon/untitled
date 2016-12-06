@@ -28,8 +28,7 @@ class Score;
 #include <future>
 #include <memory>
 
+#include "book.h"
+#include "element.h"
 #include "level.h"
 #include "score.h"
-
-#include "book.h"
-#include "levelpicker.h"

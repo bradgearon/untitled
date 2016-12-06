@@ -1,9 +1,13 @@
 #include "untitled.h"
+
 #include <QQuickItem>
 #include <future>
 #include <qquickview.h>
 
+#include "models.h"
+
 #include "form1viewmodel.h"
+#include "languagethingee.h"
 #include "levelpicker.h"
 #include "scorethingee.h"
 
@@ -57,6 +61,7 @@ int untitled_start(int argc, char *argv[]) {
 // qDebug() << "QT_QPA_PLATFORM_PLUGIN_PATH: " << pluginPath;
 #endif
 
+  // setup
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
   QQuickStyle::setStyle("Material");
@@ -91,6 +96,7 @@ int untitled_start(int argc, char *argv[]) {
   auto cultures = loadJson(":/data/culture.json");
   auto culture = cultures.object()[isoLang];
 
+  // read /:id/:version
   qDebug() << culture << " for lang " << isoLang << " " << locale;
 
   auto books = loadJson(":/data/books.json").array();
@@ -157,13 +163,14 @@ int untitled_start(int argc, char *argv[]) {
   auto imagePath = "images/" + picked->getName() + ".jpg";
 
   auto testModel = loadJson(path);
+
+  // controller:
   auto viewModel = std::make_unique<Form1ViewModel>(testModel.object());
 
   viewModel->setIsRtl(isRtl);
   viewModel->setImageName(imagePath);
   viewModel->setScore(picked);
 
-  // todo: this is the controller?
   QObject::connect(viewModel.get(), &Form1ViewModel::close, [&root] {
     root->hide();
     using namespace std::chrono_literals;
