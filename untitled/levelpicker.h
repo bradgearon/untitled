@@ -1,5 +1,5 @@
 #pragma once
-#include "models.h"
+#include "loadermoboberjigger.h"
 
 namespace untitled {
 
@@ -16,11 +16,11 @@ private:
 
   bool rebuild = true;
 
-  void setLevelsAndScores(QJsonArray json);
   void rebuildRandom();
+  void setLevelsAndScores();
 
 public:
-  LevelPicker(QJsonArray levels);
+  LevelPicker(LoaderMoboberJigger loader);
   void setRead(QString element, double read);
   Score *pick();
   Score *getScore(QString element);

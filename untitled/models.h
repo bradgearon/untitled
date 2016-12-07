@@ -27,8 +27,10 @@ class Score;
 #include <functional>
 #include <future>
 #include <memory>
+#include <type_traits>
 
 #include "book.h"
+#include "config.h"
 #include "element.h"
 #include "level.h"
 #include "score.h"

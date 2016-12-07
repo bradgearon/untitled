@@ -50,16 +50,17 @@ Page1Form {
             return;
         }
 
-        timer.start();
-
         verse = model.verse;
         isRtl = model.isRtl;
         mainImage = model.imageName;
     }
 
     image1.onStatusChanged: function(status) {
-        if(image1.status === Image.Ready) {
+        if(!timer.running && image1.status === Image.Ready) {
+            console.log(image1.source);
             model.onReady();
+            console.log("starting timer");
+            timer.start();
         }
     }
 

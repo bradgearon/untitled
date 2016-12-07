@@ -6,13 +6,15 @@ namespace untitled {
 
 class Level : public QObject {
   Q_OBJECT
+  Q_PROPERTY(double rank READ getRank WRITE setRank)
+  Q_PROPERTY(double readTotal READ getReadTotal)
+
 public:
   explicit Level(QObject *parent = 0);
-  Level(QJsonObject level, double nextRank = 0);
 
   double getRank();
   double getReadTotal();
-  const std::vector<std::unique_ptr<Score>> &getScores();
+  std::vector<std::unique_ptr<Score>> &getScores();
 
 private:
   double rank = 0;

@@ -3,7 +3,13 @@
 #include "models.h"
 
 namespace untitled {
-class Element {
+class Element : public QObject {
+  Q_OBJECT
+  Q_PROPERTY(QString verse READ getVerse WRITE setVerse)
+  Q_PROPERTY(QString title READ getTitle WRITE setTitle)
+  Q_PROPERTY(QString imagePath READ getImagePath WRITE setImagePath)
+  Q_PROPERTY(QString learnMorePath READ getLearnMorePath WRITE setLearnMorePath)
+
 private:
   QString verse;
   QString title;

@@ -21,7 +21,8 @@ SOURCES += \
     untitled.cpp \
     form1viewmodel.cpp \
     element.cpp \
-    loadermoboberjigger.cpp
+    loadermoboberjigger.cpp \
+    config.cpp
 
 HEADERS += \
     levelpicker.h \
@@ -34,7 +35,8 @@ HEADERS += \
     untitled.h \
     form1viewmodel.h \
     element.h \
-    loadermoboberjigger.h
+    loadermoboberjigger.h \
+    config.h
 
 
 # delrcc =$$system_path($$absolute_path($$RCC_DIR)/qrc_qml.*)

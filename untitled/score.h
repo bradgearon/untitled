@@ -5,6 +5,12 @@ namespace untitled {
 
 class Score : public QObject {
   Q_OBJECT
+  Q_PROPERTY(double rank READ getRank WRITE setRank)
+  Q_PROPERTY(double weight READ getWeight WRITE setWeight)
+  Q_PROPERTY(double read READ getRead WRITE setRead)
+  Q_PROPERTY(
+      double nextDifference READ getNextDifference WRITE setNextDifference)
+
 public:
   explicit Score(QObject *parent = 0);
   Score(Level *level);

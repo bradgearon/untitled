@@ -9,6 +9,7 @@
 #include "form1viewmodel.h"
 #include "languagethingee.h"
 #include "levelpicker.h"
+#include "loadermoboberjigger.h"
 #include "scorethingee.h"
 
 using namespace untitled;
@@ -86,9 +87,11 @@ int untitled_start(int argc, char *argv[]) {
   root->setPosition(-1360, 340);
 #endif
 
+  LoaderMoboberJigger loader;
+
   qDebug() << "loading levels ";
   auto levels = loadJson(":/data/level.json");
-  LevelPicker picker(levels.array());
+  LevelPicker picker(loader);
 
   auto locale = QLocale::system();
   auto isoLang = locale.name().split("_")[0];
@@ -125,20 +128,7 @@ int untitled_start(int argc, char *argv[]) {
 
   //
 
-  auto defaultConfig = loadJson(":/data/config/default.json");
-  auto config = loadJson(":/data/config/" + isoLang + ".json");
-
-  auto configObj = config.object();
-  auto defaultConfigObj = defaultConfig.object();
-
-  for (auto key : defaultConfigObj.keys()) {
-    if (configObj.contains(key)) {
-      qDebug() << "skipping property " << key;
-      continue;
-    }
-    configObj[key] = defaultConfigObj[key];
-  }
-
+  auto config = loader.loadConfig("he");
   auto scoreThingee = std::make_unique<ScoreThingee>(&picker);
 
   scoreThingee->readScores();
@@ -148,15 +138,17 @@ int untitled_start(int argc, char *argv[]) {
   auto parts = picked->getName().split('-');
 
   QString version;
-  auto versionObj = configObj["version"];
-  if (versionObj.isArray()) {
+  auto versionObj = config->getVersion();
+  if (versionObj.canConvert(QVariant::StringList)) {
+    auto index = bookMap[parts[0]]->getIndex();
     // parts[0] is the Book // get the order from the map
-    version = versionObj.toArray()[bookMap[parts[0]]->getIndex()].toString();
+    versionObj.convert(QVariant::StringList);
+    version = versionObj.toList()[index].toString();
   } else {
     version = versionObj.toString();
   }
 
-  bool isRtl = configObj["rtl"].toBool();
+  bool isRtl = config->getRtl();
   qDebug() << "rtl: " << isRtl;
 
   auto path = ":/data/word/" + picked->getName() + "/" + version + ".json";

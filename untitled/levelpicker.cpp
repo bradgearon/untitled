@@ -1,30 +1,21 @@
 #include "levelpicker.h"
 using namespace untitled;
 
-LevelPicker::LevelPicker(QJsonArray json) {
-  size_t count = static_cast<size_t>(json.count());
-  levels = std::vector<std::unique_ptr<Level>>(count);
+LevelPicker::LevelPicker(LoaderMoboberJigger loader) {
+  levels = loader.loadLevels();
   scoreMap = std::map<QString, Score *>();
-
-  setLevelsAndScores(json);
+  setLevelsAndScores();
 }
 
 std::map<QString, Score *> LevelPicker::getScoreMap() const { return scoreMap; }
 
 void LevelPicker::setReset() { rebuild = true; }
 
-void LevelPicker::setLevelsAndScores(QJsonArray json) {
-  size_t count = static_cast<size_t>(this->levels.size());
-
-  for (size_t i = 0; i < count; i++) {
-    int ii = static_cast<int>(i);
-
-    double nextRank = 0;
-    this->levels[i] = std::make_unique<Level>(json[ii].toObject(), nextRank);
-
-    for (const auto &score : this->levels[i]->getScores()) {
-      if (this->scoreMap[score->getName()] == NULL) {
-        this->scoreMap[score->getName()] = score.get();
+void LevelPicker::setLevelsAndScores() {
+  for (auto &&level : levels) {
+    for (auto &&score : level->getScores()) {
+      if (scoreMap[score->getName()] == NULL) {
+        scoreMap[score->getName()] = score.get();
       }
     }
   }

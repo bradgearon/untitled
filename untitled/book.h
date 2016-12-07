@@ -3,8 +3,13 @@
 #include "models.h"
 namespace untitled {
 
-class Book : QObject {
+class Book : public QObject {
   Q_OBJECT
+  Q_PROPERTY(uchar index READ getIndex WRITE setIndex)
+  Q_PROPERTY(QString order READ getOrder WRITE setOrder)
+  Q_PROPERTY(QString name READ getName WRITE setName)
+  Q_PROPERTY(QString abbr READ getAbbr WRITE setAbbr)
+
 public:
   explicit Book(QObject *parent = 0);
 
