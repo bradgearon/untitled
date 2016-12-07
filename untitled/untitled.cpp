@@ -105,22 +105,24 @@ int untitled_start(int argc, char *argv[]) {
   auto books = loadJson(":/data/books.json").array();
   auto bookMap = std::map<QString, Book *>();
 
-  for (uchar index = 0; index < books.count(); index++) {
-    auto list = books[index].toArray();
-    for (auto book : list) {
+  for (auto list : books) {
+    size_t index = 0;
+    for (auto book : list.toArray()) {
       auto bookObj = book.toObject();
-      Book bookModel(0);
+      auto bookModel = new Book();
 
-      bookModel.setIndex(index);
-      bookModel.setAbbr(bookObj["abbr"].toString());
-      bookModel.setName(bookObj["name"].toString());
-      bookModel.setOrder(bookObj["ord"].toString());
+      bookModel->setIndex(index);
+      bookModel->setAbbr(bookObj["abbr"].toString());
+      bookModel->setName(bookObj["name"].toString());
+      bookModel->setOrder(bookObj["ord"].toString());
 
-      bookMap[bookModel.getAbbr()] = &bookModel;
+      qDebug() << bookModel->getAbbr() << " " << bookModel->getName() << " "
+               << bookModel->getIndex() << " " << bookModel->getOrder();
 
-      qDebug() << bookModel.getAbbr() << " " << bookModel.getName() << " "
-               << bookModel.getIndex() << " " << bookModel.getOrder();
+      bookMap[bookModel->getAbbr()] = std::move(bookModel);
     }
+
+    index++;
   }
 
   // books obj used for to get version and build learn more url
@@ -128,7 +130,7 @@ int untitled_start(int argc, char *argv[]) {
 
   //
 
-  auto config = loader.loadConfig("he");
+  auto config = loader.loadConfig(isoLang);
   auto scoreThingee = std::make_unique<ScoreThingee>(&picker);
 
   scoreThingee->readScores();
@@ -140,8 +142,7 @@ int untitled_start(int argc, char *argv[]) {
   QString version;
   auto versionObj = config->getVersion();
   if (versionObj.canConvert(QVariant::StringList)) {
-    auto index = bookMap[parts[0]]->getIndex();
-    // parts[0] is the Book // get the order from the map
+    int index = static_cast<int>(bookMap[parts[0]]->getIndex());
     versionObj.convert(QVariant::StringList);
     version = versionObj.toList()[index].toString();
   } else {

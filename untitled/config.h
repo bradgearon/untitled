@@ -22,12 +22,12 @@ class Config : public QObject {
 
 private:
   /*
-   * to generage properties from these
+   * to generate properties from these
    * find: \s+(.+ )(.)(.+)\s*\=.+\;
    * replace: Q_PROPERTY\($1$2$3 READ get\U$2\E$3 WRITE set\U$2\E$3\)\n
    */
   QString more;
-  bool rtl;
+  bool rtl = false;
   QVariant version;
   QString url;
 
@@ -35,8 +35,8 @@ private:
   QString remove;
   QString title;
   QString replace;
-  bool useIds;
-  bool useName;
+  bool useIds = false;
+  bool useName = false;
 
 public:
   explicit Config(QObject *parent = 0);

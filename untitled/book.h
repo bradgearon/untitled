@@ -22,11 +22,11 @@ public:
   QString getAbbr() const;
   void setAbbr(const QString &value);
 
-  uchar getIndex() const;
-  void setIndex(const uchar &value);
+  size_t getIndex() const;
+  void setIndex(size_t value);
 
 private:
-  uchar index;
+  size_t index;
   QString order;
   QString name;
   QString abbr;

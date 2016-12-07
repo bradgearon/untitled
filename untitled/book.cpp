@@ -15,6 +15,6 @@ QString Book::getAbbr() const { return abbr; }
 
 void Book::setAbbr(const QString &value) { abbr = value; }
 
-uchar Book::getIndex() const { return index; }
+size_t Book::getIndex() const { return index; }
 
-void Book::setIndex(const uchar &value) { index = value; }
+void Book::setIndex(const size_t value) { index = value; }
