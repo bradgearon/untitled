@@ -50,6 +50,7 @@ Page1Form {
             return;
         }
 
+        learnMoreText = model.more;
         verse = model.verse;
         isRtl = model.isRtl;
         mainImage = model.imageName;

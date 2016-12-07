@@ -10,9 +10,7 @@ class Config : public QObject {
 
   Q_PROPERTY(QString more READ getMore WRITE setMore)
   Q_PROPERTY(bool rtl READ getRtl WRITE setRtl)
-  Q_PROPERTY(QVariant version READ getVersion WRITE setVersion)
   Q_PROPERTY(QString url READ getUrl WRITE setUrl)
-
   Q_PROPERTY(QString content READ getContent WRITE setContent)
   Q_PROPERTY(QString remove READ getRemove WRITE setRemove)
   Q_PROPERTY(QString title READ getTitle WRITE setTitle)
@@ -28,7 +26,7 @@ private:
    */
   QString more;
   bool rtl = false;
-  QVariant version;
+  QStringList version;
   QString url;
 
   QString content;
@@ -47,8 +45,8 @@ public:
   bool getRtl() const;
   void setRtl(bool value);
 
-  QVariant getVersion() const;
-  void setVersion(const QVariant &value);
+  QStringList getVersion() const;
+  void setVersion(const QStringList &value);
 
   QString getUrl() const;
   void setUrl(const QString &value);

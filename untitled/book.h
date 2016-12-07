@@ -6,7 +6,7 @@ namespace untitled {
 class Book : public QObject {
   Q_OBJECT
   Q_PROPERTY(uchar index READ getIndex WRITE setIndex)
-  Q_PROPERTY(QString order READ getOrder WRITE setOrder)
+  Q_PROPERTY(QString ord READ getOrder WRITE setOrder)
   Q_PROPERTY(QString name READ getName WRITE setName)
   Q_PROPERTY(QString abbr READ getAbbr WRITE setAbbr)
 
@@ -26,7 +26,7 @@ public:
   void setIndex(size_t value);
 
 private:
-  size_t index;
+  size_t index = 0;
   QString order;
   QString name;
   QString abbr;

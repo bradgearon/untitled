@@ -1096,5 +1096,33 @@
         <file>data/books.json</file>
         <file>data/culture.json</file>
         <file>data/level.json</file>
+        <file>data/config/ms.json</file>
+        <file>data/word/1Jn-4-1/bm.json</file>
+        <file>data/word/1Jn-4-7/bm.json</file>
+        <file>data/word/Acts-2-1/bm.json</file>
+        <file>data/word/Ex-14-10/bm.json</file>
+        <file>data/word/Gen-1-1/bm.json</file>
+        <file>data/word/Gen-6-9/bm.json</file>
+        <file>data/word/John-10-1/bm.json</file>
+        <file>data/word/John-14-1/bm.json</file>
+        <file>data/word/John-14-15/bm.json</file>
+        <file>data/word/John-15-1/bm.json</file>
+        <file>data/word/John-3-16/bm.json</file>
+        <file>data/word/John-6-35/bm.json</file>
+        <file>data/word/Luk-2-8/bm.json</file>
+        <file>data/word/Mat-10-26/bm.json</file>
+        <file>data/word/Mat-14-14/bm.json</file>
+        <file>data/word/Mat-14-22/bm.json</file>
+        <file>data/word/Mat-17-1/bm.json</file>
+        <file>data/word/Mat-19-13/bm.json</file>
+        <file>data/word/Mat-19-16/bm.json</file>
+        <file>data/word/Mat-3-13/bm.json</file>
+        <file>data/word/Mat-6-19/bm.json</file>
+        <file>data/word/Mat-6-25/bm.json</file>
+        <file>data/word/Mat-6-5/bm.json</file>
+        <file>data/word/Mk-11-20/bm.json</file>
+        <file>data/word/Mk-4-35/bm.json</file>
+        <file>data/word/Ps-107-1/bm.json</file>
+        <file>data/word/Rom-8-31/bm.json</file>
     </qresource>
 </RCC>

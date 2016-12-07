@@ -11,9 +11,9 @@ bool Config::getRtl() const { return rtl; }
 
 void Config::setRtl(bool value) { rtl = value; }
 
-QVariant Config::getVersion() const { return version; }
+QStringList Config::getVersion() const { return version; }
 
-void Config::setVersion(const QVariant &value) { version = value; }
+void Config::setVersion(const QStringList &value) { version = value; }
 
 QString Config::getUrl() const { return url; }
 

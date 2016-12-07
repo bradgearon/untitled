@@ -7,7 +7,7 @@ class LoaderMoboberJigger {
 public:
   LoaderMoboberJigger();
   std::vector<std::unique_ptr<Level>> loadLevels();
-  std::vector<std::unique_ptr<Book>> loadBooks();
+  std::map<QString, Book *> loadBooks();
   Config *loadConfig(QString isoLang);
   Element *loadElement(QString name);
 

@@ -53,7 +53,7 @@ int untitled_start(int argc, char *argv[]) {
   qputenv("QML_IMPORT_TRACE", ba);
 // JNI_OnLoad
 
-#if ANDROID
+#ifdef ANDROID
 // QLibrary platform("libplugins_platforms_android_libqtforandroid");
 
 // QFileInfo platformFile(platform.fileName());
@@ -73,8 +73,8 @@ int untitled_start(int argc, char *argv[]) {
   QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
 
-  QFont roboto("Roboto", 12, QFont::Normal, false);
-  app.setFont(roboto);
+  QFont font("Roboto", 12, QFont::Normal, false);
+  app.setFont(font);
 
   auto root = std::make_unique<QQuickView>();
 
@@ -89,77 +89,43 @@ int untitled_start(int argc, char *argv[]) {
 
   LoaderMoboberJigger loader;
 
-  qDebug() << "loading levels ";
-  auto levels = loadJson(":/data/level.json");
   LevelPicker picker(loader);
+  LanguageThingee thingee(loader);
+
+  auto bookMap = loader.loadBooks();
 
   auto locale = QLocale::system();
   auto isoLang = locale.name().split("_")[0];
 
-  auto cultures = loadJson(":/data/culture.json");
-  auto culture = cultures.object()[isoLang];
-
-  // read /:id/:version
-  qDebug() << culture << " for lang " << isoLang << " " << locale;
-
-  auto books = loadJson(":/data/books.json").array();
-  auto bookMap = std::map<QString, Book *>();
-
-  for (auto list : books) {
-    size_t index = 0;
-    for (auto book : list.toArray()) {
-      auto bookObj = book.toObject();
-      auto bookModel = new Book();
-
-      bookModel->setIndex(index);
-      bookModel->setAbbr(bookObj["abbr"].toString());
-      bookModel->setName(bookObj["name"].toString());
-      bookModel->setOrder(bookObj["ord"].toString());
-
-      qDebug() << bookModel->getAbbr() << " " << bookModel->getName() << " "
-               << bookModel->getIndex() << " " << bookModel->getOrder();
-
-      bookMap[bookModel->getAbbr()] = std::move(bookModel);
-    }
-
-    index++;
-  }
+  auto config = loader.loadConfig(isoLang);
 
   // books obj used for to get version and build learn more url
   // it uses config
 
-  //
-
-  auto config = loader.loadConfig(isoLang);
   auto scoreThingee = std::make_unique<ScoreThingee>(&picker);
 
   scoreThingee->readScores();
   scoreThingee->saveScores();
 
   auto picked = picker.pick();
-  auto parts = picked->getName().split('-');
 
-  QString version;
   auto versionObj = config->getVersion();
-  if (versionObj.canConvert(QVariant::StringList)) {
-    int index = static_cast<int>(bookMap[parts[0]]->getIndex());
-    versionObj.convert(QVariant::StringList);
-    version = versionObj.toList()[index].toString();
-  } else {
-    version = versionObj.toString();
-  }
-
-  bool isRtl = config->getRtl();
-  qDebug() << "rtl: " << isRtl;
+  auto parts = picked->getName().split('-');
+  int index = static_cast<int>(bookMap[parts[0]]->getIndex());
+  QString version = versionObj[index];
 
   auto path = ":/data/word/" + picked->getName() + "/" + version + ".json";
   auto imagePath = "images/" + picked->getName() + ".jpg";
+
+  auto isRtl = config->getRtl();
+  auto more = config->getMore();
 
   auto testModel = loadJson(path);
 
   // controller:
   auto viewModel = std::make_unique<Form1ViewModel>(testModel.object());
 
+  viewModel->setMore(more);
   viewModel->setIsRtl(isRtl);
   viewModel->setImageName(imagePath);
   viewModel->setScore(picked);

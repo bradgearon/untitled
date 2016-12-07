@@ -14,6 +14,10 @@ Form1ViewModel::Form1ViewModel(QJsonObject modelJson) : Form1ViewModel() {
   }
 }
 
+QString Form1ViewModel::getMore() const { return more; }
+
+void Form1ViewModel::setMore(const QString &value) { more = value; }
+
 bool Form1ViewModel::getIsRtl() const { return isRtl; }
 
 void Form1ViewModel::setIsRtl(bool value) { isRtl = value; }

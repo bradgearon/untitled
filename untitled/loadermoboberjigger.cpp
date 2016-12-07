@@ -9,33 +9,44 @@ std::vector<std::unique_ptr<Level>> LoaderMoboberJigger::loadLevels() {
   for (size_t i = 0; i < levels.size(); i++) {
     auto elements =
         levelsJson[static_cast<int>(i)].toObject()["elements"].toArray();
+    auto level = levels[i].get();
     for (auto element : elements) {
-      auto level = levels[i].get();
       auto score = std::make_unique<Score>(level);
 
-      // double nextDifference = getRank() - nextRank;
       // todo: connect Score::onValueUpdated to updateWhateverItis
       score->setName(element.toString());
       score->setRank(level->getRank());
       score->setWeight(level->getRank());
-      score->setNextDifference(0); // todo: nextDifference
+      // just use rank seems to work
+      score->setNextDifference(level->getRank());
 
-      levels[i]->getScores().push_back(std::move(score));
+      level->getScores().push_back(std::move(score));
     }
   }
   return levels;
 }
 
-std::vector<std::unique_ptr<Book>> LoaderMoboberJigger::loadBooks() {
+std::map<QString, Book *> LoaderMoboberJigger::loadBooks() {
   auto booksJson = loadJson(":/data/books.json").array();
-  return getList<Book>(booksJson);
+  std::map<QString, Book *> bookMap;
+  size_t index = 0;
+  for (auto books : booksJson) {
+    for (auto bookJson : books.toArray()) {
+      auto book = fromJson<Book>(bookJson.toObject());
+      book->setIndex(index);
+      bookMap[book->getAbbr()] = std::move(book);
+    }
+    index++;
+  }
+
+  return bookMap;
 }
 
 Config *LoaderMoboberJigger::loadConfig(QString isoLang) {
   auto defaultConfig = loadJson(":/data/config/default.json");
-  auto config = loadJson(":/data/config/" + isoLang + ".json");
+  auto configJson = loadJson(":/data/config/" + isoLang + ".json");
 
-  auto configObj = config.object();
+  auto configObj = configJson.object();
   auto defaultConfigObj = defaultConfig.object();
 
   for (auto key : defaultConfigObj.keys()) {
@@ -46,7 +57,19 @@ Config *LoaderMoboberJigger::loadConfig(QString isoLang) {
     configObj[key] = defaultConfigObj[key];
   }
 
-  return fromJson<Config>(configObj);
+  auto config = fromJson<Config>(configObj);
+
+  QStringList list;
+  auto versionObj = configObj["version"];
+  if (versionObj.isArray()) {
+    list = versionObj.toVariant().toStringList();
+  } else {
+    list.append(versionObj.toString());
+    list.append(versionObj.toString());
+  }
+
+  config->setVersion(list);
+  return std::move(config);
 }
 
 Element *LoaderMoboberJigger::loadElement(QString name) {}
@@ -63,17 +86,17 @@ template <typename T> T *LoaderMoboberJigger::fromJson(QJsonObject jsonObject) {
   static_assert(std::is_base_of<QObject, T>::value,
                 "T must inherit from QObject");
   auto fromPtr = new T();
-  auto from = dynamic_cast<QObject *>(fromPtr);
-  const auto meta = from->metaObject();
+  // auto from = dynamic_cast<QObject *>(fromPtr);
+  const auto meta = fromPtr->metaObject();
   int count = meta->propertyCount();
   for (auto i = 0; i < count; i++) {
     auto property = meta->property(i);
     if (jsonObject.contains(property.name())) {
       auto value = jsonObject[property.name()];
-      from->setProperty(property.name(), value.toVariant());
+      fromPtr->setProperty(property.name(), value.toVariant());
     }
   }
-  return fromPtr;
+  return std::move(fromPtr);
 }
 
 template <typename T>
@@ -83,8 +106,7 @@ std::vector<std::unique_ptr<T>> LoaderMoboberJigger::getList(QJsonArray array) {
   size_t index = 0;
 
   for (auto json : array) {
-    auto level = fromJson<T>(json.toObject());
-    levels[index] = std::unique_ptr<T>(level);
+    levels[index] = std::unique_ptr<T>(fromJson<T>(json.toObject()));
     index++;
   }
   return levels;

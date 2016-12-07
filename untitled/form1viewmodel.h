@@ -10,6 +10,7 @@ class Form1ViewModel : public QObject {
   Q_PROPERTY(QString imageName READ getImageName WRITE setImageName)
   Q_PROPERTY(QString verse READ getVerse WRITE setVerse)
   Q_PROPERTY(QString title READ getTitle WRITE setTitle)
+  Q_PROPERTY(QString more READ getMore WRITE setMore)
 
 private:
   Score *score;
@@ -18,6 +19,7 @@ private:
   QString imageName;
   QString title;
   QString verse;
+  QString more;
 
 public:
   explicit Form1ViewModel(QObject *parent = 0);
@@ -43,6 +45,9 @@ public:
 
   // how does a score get updated?
   // does this have reference to a score? yes
+
+  QString getMore() const;
+  void setMore(const QString &value);
 
 signals:
   void close();

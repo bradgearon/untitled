@@ -7,6 +7,7 @@ Item {
     id: item1
     property alias mainImage: image1.source
     property alias verse: textArea1.text
+    property alias learnMoreText: learnMore.text
     property alias flickable: flick
     property alias textArea: textArea1
     property alias close: close
@@ -36,9 +37,7 @@ Item {
 
             TextArea {
                 id: textArea1
-
                 anchors.fill: parent
-
                 rightPadding: 15
                 leftPadding: 14
                 topPadding: 14
@@ -47,10 +46,7 @@ Item {
                 textFormat: Text.AutoText
                 wrapMode: Text.Wrap
                 font.pixelSize: 22
-
                 text: "<big><b>This is some text</b></big><br />Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel massa a tortor suscipit tincidunt nec malesuada nunc. Aenean porta tortor et eros tempor, venenatis blandit magna egestas. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Fusce tincidunt massa dui, in condimentum elit blandit ac. Nulla tempor vel nunc at pellentesque. Aenean luctus justo quam, nec ultricies nulla auctor et. Proin eleifend velit sed interdum rutrum. Maecenas sed bibendum nisl, non vestibulum ligula. Integer in vulputate odio. In vitae feugiat ex. Duis nec ligula at tortor vulputate facilisis. Sed aliquam lorem at nibh suscipit rutrum. Aliquam quis ex est. Donec et feugiat odio, eu semper nulla. Sed auctor et lacus in imperdiet. Aliquam et ornare ante. Maecenas suscipit fringilla orci. Praesent elementum mi mauris, eu pretium mauris efficitur vitae. Nulla suscipit ligula in eros congue fermentum. Aliquam ultrices, mi quis sagittis gravida, libero odio ultricies arcu, quis pretium dolor est nec ligula. Nunc porttitor ligula non nisl volutpat ultrices. Etiam eget leo et mi volutpat bibendum quis at est."
-                font.family: "Roboto"
-
                 readOnly: true
                 background: null
             }

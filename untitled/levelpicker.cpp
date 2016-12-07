@@ -14,7 +14,7 @@ void LevelPicker::setReset() { rebuild = true; }
 void LevelPicker::setLevelsAndScores() {
   for (auto &&level : levels) {
     for (auto &&score : level->getScores()) {
-      if (scoreMap[score->getName()] == NULL) {
+      if (scoreMap.count(score->getName()) < 1) {
         scoreMap[score->getName()] = score.get();
       }
     }
