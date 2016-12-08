@@ -1,58 +1,27 @@
 #include "form1viewmodel.h"
 using namespace untitled;
 
-Form1ViewModel::Form1ViewModel(QObject *parent) : QObject(parent) {}
+void Form1ViewModel::setConfig(Config *value) { config = value; }
 
-Form1ViewModel::Form1ViewModel(QJsonObject modelJson) : Form1ViewModel() {
-  const auto meta = metaObject();
-  int count = meta->propertyCount();
-  for (auto i = 0; i < count; i++) {
-    auto property = meta->property(i);
-    if (modelJson.contains(property.name())) {
-      setProperty(property.name(), modelJson[property.name()].toVariant());
-    }
-  }
-}
-
-QString Form1ViewModel::getMore() const { return more; }
-
-void Form1ViewModel::setMore(const QString &value) { more = value; }
-
-bool Form1ViewModel::getIsRtl() const { return isRtl; }
-
-void Form1ViewModel::setIsRtl(bool value) { isRtl = value; }
-
-QString Form1ViewModel::getImageName() const { return imageName; }
-
-void Form1ViewModel::setImageName(const QString &value) { imageName = value; }
-
-QString Form1ViewModel::getVerse() const { return verse; }
-
-void Form1ViewModel::setVerse(const QString &value) { verse = value; }
-
-QString Form1ViewModel::getTitle() const { return title; }
-
-void Form1ViewModel::setTitle(const QString &value) { title = value; }
+void Form1ViewModel::setElement(Element *value) { element = value; }
 
 void Form1ViewModel::setScore(Score *value) { score = value; }
 
-void untitled::Form1ViewModel::onRead(double value) {
-  emit read(value);
-  score->setRead(value);
-  qDebug() << "onRead: " << value;
+Form1ViewModel::Form1ViewModel(QObject *parent) : QObject(parent) {}
+
+Form1ViewModel::Form1ViewModel(Score *score, Config *config, Element *element)
+    : Form1ViewModel() {
+  this->score = score;
+  this->config = config;
+  this->element = element;
 }
 
-void untitled::Form1ViewModel::onLearnMore() {
-  emit learnMore();
-  qDebug() << "onLearnMore ";
-}
+QString Form1ViewModel::getMore() const { return config->getMore(); }
 
-void untitled::Form1ViewModel::onClose() {
-  emit close();
-  qDebug() << " on close";
-}
+bool Form1ViewModel::getIsRtl() const { return config->getRtl(); }
 
-void untitled::Form1ViewModel::onReady() {
-  qDebug() << " form1viewmodel on show ";
-  emit ready();
-}
+QString Form1ViewModel::getImageName() const { return element->getImagePath(); }
+
+QString Form1ViewModel::getVerse() const { return element->getVerse(); }
+
+QString Form1ViewModel::getTitle() const { return element->getTitle(); }

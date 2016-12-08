@@ -70,6 +70,7 @@ Page1Form {
             return;
         }
         model.onClose();
+        timer.stop();
     }
 
     learnMore.onClicked: function() {

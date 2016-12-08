@@ -6,59 +6,35 @@ namespace untitled {
 class Form1ViewModel : public QObject {
   Q_OBJECT
 
-  Q_PROPERTY(bool isRtl READ getIsRtl WRITE setIsRtl)
-  Q_PROPERTY(QString imageName READ getImageName WRITE setImageName)
-  Q_PROPERTY(QString verse READ getVerse WRITE setVerse)
-  Q_PROPERTY(QString title READ getTitle WRITE setTitle)
-  Q_PROPERTY(QString more READ getMore WRITE setMore)
+  Q_PROPERTY(bool isRtl READ getIsRtl)
+  Q_PROPERTY(QString imageName READ getImageName)
+  Q_PROPERTY(QString verse READ getVerse)
+  Q_PROPERTY(QString title READ getTitle)
+  Q_PROPERTY(QString more READ getMore)
 
 private:
   Score *score;
-
-  bool isRtl;
-  QString imageName;
-  QString title;
-  QString verse;
-  QString more;
+  Element *element;
+  Config *config;
 
 public:
   explicit Form1ViewModel(QObject *parent = 0);
-  Form1ViewModel(QJsonObject viewModel);
+  Form1ViewModel(Score *score, Config *config, Element *element);
 
   bool getIsRtl() const;
-  void setIsRtl(bool value);
-
   QString getImageName() const;
-  void setImageName(const QString &value);
-
   QString getVerse() const;
-  void setVerse(const QString &value);
-
   QString getTitle() const;
-  void setTitle(const QString &value);
-
-  void setScore(Score *value);
-
-  // controller observes things on here
-  // when value is updated
-  // controller updates it
-
-  // how does a score get updated?
-  // does this have reference to a score? yes
-
   QString getMore() const;
-  void setMore(const QString &value);
+
+  void setConfig(Config *value);
+  void setElement(Element *value);
+  void setScore(Score *value);
 
 signals:
   void close();
   void learnMore();
   void read(double value);
   void ready();
-
-public slots:
-  void onRead(double value);
-  void onLearnMore();
-  void onClose();
-  void onReady();
 };
 }

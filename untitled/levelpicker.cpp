@@ -82,7 +82,8 @@ Score *LevelPicker::pick() {
   qDebug() << " picked " << picked;
 
   const auto score = scores[static_cast<size_t>(picked)];
-  QObject::connect(score, &Score::readChanged, [this]() { this->setReset(); });
+  pickedConnection = QObject::connect(score, &Score::readChanged,
+                                      [this]() { this->setReset(); });
 
   return score;
 }

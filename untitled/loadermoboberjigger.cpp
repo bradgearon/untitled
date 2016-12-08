@@ -72,7 +72,15 @@ Config *LoaderMoboberJigger::loadConfig(QString isoLang) {
   return std::move(config);
 }
 
-Element *LoaderMoboberJigger::loadElement(QString name) {}
+Element *LoaderMoboberJigger::loadElement(QString name, QString version) {
+  auto path = ":/data/word/" + name + "/" + version + ".json";
+  auto elementJson = loadJson(path).object();
+  auto element = fromJson<Element>(elementJson);
+  auto imagePath = "images/" + name + ".jpg";
+  element->setImagePath(imagePath);
+  // element->setLearnMorePath()
+  return std::move(element);
+}
 
 QJsonDocument LoaderMoboberJigger::loadJson(QString url) {
   QFile jsonFile(url);

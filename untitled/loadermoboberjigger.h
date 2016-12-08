@@ -9,7 +9,7 @@ public:
   std::vector<std::unique_ptr<Level>> loadLevels();
   std::map<QString, Book *> loadBooks();
   Config *loadConfig(QString isoLang);
-  Element *loadElement(QString name);
+  Element *loadElement(QString name, QString version);
 
 private:
   QJsonDocument loadJson(QString url);
