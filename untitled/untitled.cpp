@@ -2,15 +2,18 @@
 
 #include <QQuickItem>
 #include <QQuickView>
+#include <qandroidjnienvironment.h>
+
+#include "jni.h"
+#include <QtAndroid>
 
 #include "maincontroller.h"
 
 using namespace untitled;
 
-// static JavaVM *g_VM;
-
-int untitled_start(int argc, char *argv[]) {
+int untitled_init(int argc, char *argv[]) {
   qDebug() << "running ";
+
   Q_INIT_RESOURCE(assets);
   QByteArray ba;
   int n = 1;
@@ -54,11 +57,26 @@ int untitled_start(int argc, char *argv[]) {
   root->setPosition(-1360, 340);
 #endif
 
-  MainController controller(std::move(rootObject));
+  mainController = new MainController(std::move(rootObject));
+  mainController->index();
 
-  controller.index();
   const int result = app.exec();
 
   Q_CLEANUP_RESOURCE(assets);
   return result;
+}
+
+void untitled_show() {
+  // show the view?
+}
+
+void untitled_hide() {
+  // hide the view?
+}
+
+int Java_com_wds_launcher_OtherActivity_unititled_1works() {
+  if (mainController->isReady) {
+    mainController->staticMetaObject.invokeMethod(mainController, "show",
+                                                  Qt::AutoConnection);
+  }
 }

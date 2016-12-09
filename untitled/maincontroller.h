@@ -34,7 +34,8 @@ private:
 public:
   MainController(QQuickItem *parent);
   void index();
-
+  Q_INVOKABLE void show();
+  bool isReady;
 public slots:
   void onRead(double value);
   void onLearnMore();

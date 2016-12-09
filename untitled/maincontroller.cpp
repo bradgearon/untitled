@@ -1,4 +1,5 @@
 #include "maincontroller.h"
+#include <QtAndroid>
 
 using namespace untitled;
 
@@ -55,10 +56,9 @@ void MainController::onLearnMore() {
 }
 
 void MainController::onClose() {
-  view->window()->hide();
-
-  using namespace std::chrono_literals;
-  std::this_thread::sleep_for(5s);
+  view->window()->close();
+  // using namespace std::chrono_literals;
+  // std::this_thread::sleep_for(5s);
 
   picked = picker->pick();
 
@@ -79,11 +79,17 @@ void MainController::onClose() {
 }
 
 void MainController::onReady() {
-  view->window()->show();
+  // view->window()->show();
+  isReady = true;
   qDebug() << "main controller on ready";
 }
 
 void MainController::onReadChanged() {
   qDebug() << "main controller on read changed";
   scores->saveScores();
+}
+
+void MainController::show() {
+  qDebug() << "main controller on show";
+  view->window()->show();
 }
