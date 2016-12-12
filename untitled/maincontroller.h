@@ -7,6 +7,7 @@
 #include "languagethingee.h"
 #include "levelpicker.h"
 #include "loadermoboberjigger.h"
+#include "platformthingee.h"
 #include "scorethingee.h"
 
 #include <QQuickItem>
@@ -18,6 +19,7 @@ class MainController : public QObject {
   Q_OBJECT
 
 private:
+  bool isReady;
   QQuickItem *view;
   Config *config;
   Score *picked;
@@ -26,6 +28,7 @@ private:
   QMetaObject::Connection pickedConnection;
   QString isoLang;
 
+  std::unique_ptr<PlatformThingee> platformThingee;
   std::unique_ptr<Form1ViewModel> viewModel;
   std::unique_ptr<LevelPicker> picker;
   std::unique_ptr<LanguageThingee> languages;
@@ -33,9 +36,10 @@ private:
 
 public:
   MainController(QQuickItem *parent);
-  void index();
   Q_INVOKABLE void show();
-  bool isReady;
+  void setPlatformThingee(PlatformThingee *value);
+  void index();
+
 public slots:
   void onRead(double value);
   void onLearnMore();

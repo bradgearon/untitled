@@ -2,11 +2,8 @@
 
 #include <QQuickItem>
 #include <QQuickView>
-#include <qandroidjnienvironment.h>
 
-#include "jni.h"
-#include <QtAndroid>
-
+#include "androidplatformthingee.h"
 #include "maincontroller.h"
 
 using namespace untitled;
@@ -14,19 +11,18 @@ using namespace untitled;
 int untitled_init(int argc, char *argv[]) {
   qDebug() << "running ";
 
+  PlatformThingee *platformThingee;
+
+#ifdef ANDROID
+  platformThingee = new AndroidPlatformThingee();
+  platformThingee->hide();
+#endif
+
   Q_INIT_RESOURCE(assets);
   QByteArray ba;
   int n = 1;
   ba.setNum(n);
   qputenv("QML_IMPORT_TRACE", ba);
-
-#ifdef ANDROID
-  auto activity = QtAndroid::androidActivity();
-  QAndroidJniObject::callStaticMethod<void>(
-      "com/wds/untitled/UntitledNative", "sendToBack",
-      "(Landroid/app/Activity;)V", activity.object());
-#endif
-
   // setup
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
 
@@ -47,6 +43,7 @@ int untitled_init(int argc, char *argv[]) {
   root->setSource(QUrl(QLatin1String("qrc:/main.qml")));
 
   QQuickItem *rootObject = root->rootObject();
+  rootObject->window()->showFullScreen();
 
 #ifdef WIN32
   root->setWidth(800);
@@ -55,6 +52,7 @@ int untitled_init(int argc, char *argv[]) {
 #endif
 
   mainController = new MainController(std::move(rootObject));
+  mainController->setPlatformThingee(std::move(platformThingee));
   mainController->index();
 
   const int result = app.exec();
@@ -63,10 +61,4 @@ int untitled_init(int argc, char *argv[]) {
   return result;
 }
 
-void untitled_show() {
-  // show the view?
-}
-
-void untitled_hide() {
-  // hide the view?
-}
+void untitled_show() { mainController->show(); }

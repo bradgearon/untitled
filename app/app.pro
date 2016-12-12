@@ -28,7 +28,8 @@ DISTFILES += \
     android/gradle/wrapper/gradle-wrapper.properties \
     android/gradlew.bat \
     android/src/java/UntitledNative.java \
-    android/res/values/styles.xml
+    android/res/values/styles.xml \
+    android/src/java/MyActivity.java
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

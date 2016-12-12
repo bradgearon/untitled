@@ -23,7 +23,8 @@ SOURCES += \
     element.cpp \
     loadermoboberjigger.cpp \
     config.cpp \
-    maincontroller.cpp
+    maincontroller.cpp \
+    androidplatformthingee.cpp
 
 HEADERS += \
     levelpicker.h \
@@ -38,7 +39,9 @@ HEADERS += \
     element.h \
     loadermoboberjigger.h \
     config.h \
-    maincontroller.h
+    maincontroller.h \
+    platformthingee.h \
+    androidplatformthingee.h
 
 
 # delrcc =$$system_path($$absolute_path($$RCC_DIR)/qrc_qml.*)

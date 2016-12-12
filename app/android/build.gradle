@@ -4,7 +4,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:1.1.0'
+      classpath 'com.android.tools.build:gradle:2.2.0'
     }
 }
 
@@ -46,8 +46,8 @@ android {
             res.srcDirs = [qt5AndroidDir + '/res', 'res']
             resources.srcDirs = ['src/resources']
             renderscript.srcDirs = ['src']
-            assets.srcDirs = ['assets']
-            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['noassets']
+            jniLibs.srcDirs = ['nolibs']
        }
     }
 
