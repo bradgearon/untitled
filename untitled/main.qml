@@ -5,6 +5,7 @@ Rectangle {
     id: main
     anchors.fill: parent
     visible: true
+
     property var model
 
     Page1 {

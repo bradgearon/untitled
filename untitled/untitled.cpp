@@ -19,15 +19,12 @@ int untitled_init(int argc, char *argv[]) {
   int n = 1;
   ba.setNum(n);
   qputenv("QML_IMPORT_TRACE", ba);
-// JNI_OnLoad
 
 #ifdef ANDROID
-// QLibrary platform("libplugins_platforms_android_libqtforandroid");
-
-// QFileInfo platformFile(platform.fileName());
-// auto pluginPath = platformFile.absolutePath();
-// qputenv("QT_QPA_PLATFORM_PLUGIN_PATH", pluginPath.toUtf8());
-// qDebug() << "QT_QPA_PLATFORM_PLUGIN_PATH: " << pluginPath;
+  auto activity = QtAndroid::androidActivity();
+  QAndroidJniObject::callStaticMethod<void>(
+      "com/wds/untitled/UntitledNative", "sendToBack",
+      "(Landroid/app/Activity;)V", activity.object());
 #endif
 
   // setup
@@ -46,7 +43,7 @@ int untitled_init(int argc, char *argv[]) {
 
   auto root = std::make_unique<QQuickView>();
 
-  root->setFlags(Qt::FramelessWindowHint);
+  root->setResizeMode(QQuickView::SizeRootObjectToView);
   root->setSource(QUrl(QLatin1String("qrc:/main.qml")));
 
   QQuickItem *rootObject = root->rootObject();
@@ -72,11 +69,4 @@ void untitled_show() {
 
 void untitled_hide() {
   // hide the view?
-}
-
-int Java_com_wds_launcher_OtherActivity_unititled_1works() {
-  if (mainController->isReady) {
-    mainController->staticMetaObject.invokeMethod(mainController, "show",
-                                                  Qt::AutoConnection);
-  }
 }

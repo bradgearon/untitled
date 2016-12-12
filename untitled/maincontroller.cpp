@@ -1,7 +1,7 @@
 #include "maincontroller.h"
-#include <QtAndroid>
-
+#include <QtAndroidExtras>
 using namespace untitled;
+const char *helper = "com/wds/untitled/UntitledNative";
 
 MainController::MainController(QQuickItem *parent) : QObject() {
   view = parent;
@@ -56,10 +56,17 @@ void MainController::onLearnMore() {
 }
 
 void MainController::onClose() {
-  view->window()->close();
+  qDebug() << " on close";
+
+  auto app = (QGuiApplication *)QGuiApplication::instance();
+  app->applicationStateChanged(Qt::ApplicationState::ApplicationInactive);
+
+  auto activity = QtAndroid::androidActivity();
+  QAndroidJniObject::callStaticMethod<void>(
+      helper, "sendToBack", "(Landroid/app/Activity;)V", activity.object());
+
   // using namespace std::chrono_literals;
   // std::this_thread::sleep_for(5s);
-
   picked = picker->pick();
 
   if (pickedConnection) {
@@ -75,12 +82,16 @@ void MainController::onClose() {
   viewModel->setScore(picked);
 
   view->setProperty("model", viewModelVariant);
-  qDebug() << "on close";
 }
 
 void MainController::onReady() {
-  // view->window()->show();
   isReady = true;
+
+  view->window()->update();
+  using namespace std::chrono_literals;
+  std::this_thread::sleep_for(5s);
+
+  show();
   qDebug() << "main controller on ready";
 }
 
@@ -91,5 +102,12 @@ void MainController::onReadChanged() {
 
 void MainController::show() {
   qDebug() << "main controller on show";
-  view->window()->show();
+
+  auto activity = QtAndroid::androidActivity();
+  qDebug() << "activity instance " << activity.isValid();
+
+  view->window()->showFullScreen();
+
+  QAndroidJniObject::callStaticMethod<void>(
+      helper, "bringToFront", "(Landroid/app/Activity;)V", activity.object());
 }

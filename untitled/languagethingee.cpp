@@ -21,6 +21,15 @@ Element *LanguageThingee::getElementByName(QString name) {
 
   element = loader.loadElement(name, version);
   element->setLearnMorePath(interpolate(config->getUrl(), version, location));
+
+  if (!element->getTitle().isNull()) {
+    auto verse = QString("<big><b>%1</b></big><p>%2</p>")
+                     .arg(element->getTitle())
+                     .arg(element->getVerse());
+
+    element->setVerse(verse);
+  }
+
   return std::move(element);
 }
 
