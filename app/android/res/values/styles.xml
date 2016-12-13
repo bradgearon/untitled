@@ -2,11 +2,9 @@
 <resources>
   <style name="Translucent.NoAnimation" parent="@android:style/Theme.Translucent.NoTitleBar.Fullscreen">
     <item name="android:windowAnimationStyle">@null</item>
-    <item name="android:windowActivityTransitions">false</item>
     <item name="android:windowDisablePreview">true</item>
   </style>
   <style name="Default.NoAnimation" parent="@android:style/Theme.NoTitleBar.Fullscreen">
     <item name="android:windowAnimationStyle">@null</item>
-    <item name="android:windowActivityTransitions">false</item>
   </style>
 </resources>

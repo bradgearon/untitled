@@ -18,10 +18,10 @@ int untitled_init(int argc, char *argv[]) {
   platformThingee->hide();
 #endif
 
-  Q_INIT_RESOURCE(assets);
   QByteArray ba;
   int n = 1;
   ba.setNum(n);
+
   qputenv("QML_IMPORT_TRACE", ba);
   // setup
   QGuiApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
@@ -30,12 +30,15 @@ int untitled_init(int argc, char *argv[]) {
   QQuickWindow::setDefaultAlphaBuffer(true);
 
   QGuiApplication app(argc, argv);
+  app.applicationStateChanged(Qt::ApplicationInactive);
 
   QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
 
   QFont font("Roboto", 12, QFont::Normal, false);
   app.setFont(font);
+
+  Q_INIT_RESOURCE(assets);
 
   auto root = std::make_unique<QQuickView>();
 
