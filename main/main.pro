@@ -3,7 +3,7 @@ TEMPLATE = subdirs
 SUBDIRS = \
   ../assets \
   ../untitled \
-    ../app
+  ../app
 
 win32: {
   SUBDIRS += ../tests

@@ -69,7 +69,7 @@ QString LanguageThingee::interpolate(QString url, QString version,
     }
   }
 
-  QString result = newUrl.join("");
+  QString result = newUrl.join("").toLower();
   qDebug() << " read more url: " << result;
   return result;
 }

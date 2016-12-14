@@ -3,8 +3,14 @@
 #include <QQuickItem>
 #include <QQuickView>
 
-#include "androidplatformthingee.h"
 #include "maincontroller.h"
+
+#ifdef ANDROID
+#include "androidplatformthingee.h"
+#endif
+#ifdef WIN32
+#include "winplatformthingee.h"
+#endif
 
 using namespace untitled;
 
@@ -12,11 +18,6 @@ int untitled_init(int argc, char *argv[]) {
   qDebug() << "running ";
 
   PlatformThingee *platformThingee;
-
-#ifdef ANDROID
-  platformThingee = new AndroidPlatformThingee();
-  platformThingee->hide();
-#endif
 
   QByteArray ba;
   int n = 1;
@@ -30,13 +31,20 @@ int untitled_init(int argc, char *argv[]) {
   QQuickWindow::setDefaultAlphaBuffer(true);
 
   QGuiApplication app(argc, argv);
-  app.applicationStateChanged(Qt::ApplicationInactive);
 
   QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
 
   QFont font("Roboto", 12, QFont::Normal, false);
   app.setFont(font);
+
+#ifdef ANDROID
+  platformThingee = new AndroidPlatformThingee();
+  platformThingee->hide();
+#endif
+#ifdef WIN32
+  platformThingee = new WinPlatformThingee();
+#endif
 
   Q_INIT_RESOURCE(assets);
 

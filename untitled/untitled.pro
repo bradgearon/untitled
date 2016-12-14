@@ -5,6 +5,8 @@ QT += quick quickcontrols2 sql
 android:QT+= androidextras
 
 include(../main/common.pri)
+include(../libs/qt-google-analytics/qt-google-analytics.pri)
+
 LIBS += -L$$DESTDIR -lassets
 
 DEFINES += UNTITLED_LIB
@@ -24,6 +26,9 @@ SOURCES += \
     loadermoboberjigger.cpp \
     config.cpp \
     maincontroller.cpp \
+    winplatformthingee.cpp
+
+android:SOURCES += \
     androidplatformthingee.cpp
 
 HEADERS += \
@@ -41,7 +46,8 @@ HEADERS += \
     config.h \
     maincontroller.h \
     platformthingee.h \
-    androidplatformthingee.h
+    androidplatformthingee.h \
+    winplatformthingee.h
 
 
 # delrcc =$$system_path($$absolute_path($$RCC_DIR)/qrc_qml.*)

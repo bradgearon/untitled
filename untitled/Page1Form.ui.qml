@@ -82,6 +82,7 @@ Item {
 
         anchors.topMargin: 8
         anchors.leftMargin: 12
+        anchors.rightMargin: 12
         anchors.top: parent.top
 
         opacity: .75
@@ -106,11 +107,15 @@ Item {
         z: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 7
+        anchors.leftMargin: 12
+        anchors.rightMargin: 12
         text: qsTr("Learn More...")
+        transformOrigin: Item.Right
         highlighted: true
         bottomPadding: 20
         topPadding: 20
         padding: 16
+        font.pixelSize: (height * .35)
     }
 
     states: [

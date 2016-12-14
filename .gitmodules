@@ -1,0 +1,3 @@
+[submodule "libs/qt-google-analytics"]
+	path = libs/qt-google-analytics
+	url = https://github.com/HSAnet/qt-google-analytics

@@ -8,36 +8,21 @@ Page1Form {
     property bool isRtl: true
     anchors.fill: parent
 
-    learnMoreX: {
-        if(isRtl) {
-            return 12;
-        } else {
-            return this.width - 12 - learnMore.width
-        }
-    }
-
-    closeX: {
-        if(isRtl) {
-            return 12;
-        } else {
-            return  this.width - 12 - close.width
-        }
-    }
-
     Timer {
         id: timer
         running: false
         repeat: true
-
+        triggeredOnStart: false
         onTriggered: function() {
             if(timerCurrent++ < timerTotal) {
+                console.log("triggered");
                 closeTimer.text = timerTotal - timerCurrent + '';
                 return;
             }
 
-            running = false;
             close.visible = true;
             closeTimer.visible = false;
+            running = false;
         }
     }
 
@@ -54,6 +39,20 @@ Page1Form {
         verse = model.verse;
         isRtl = model.isRtl;
         mainImage = model.imageName;
+
+        if(isRtl) {
+            close.anchors.right = undefined;
+            close.anchors.left = close.parent.left;
+
+            learnMore.anchors.right = undefined;
+            learnMore.anchors.left = learnMore.parent.left;
+        } else {
+            close.anchors.left = undefined;
+            close.anchors.right = close.parent.right;
+
+            learnMore.anchors.left = undefined;
+            learnMore.anchors.right = learnMore.parent.right;
+        }
     }
 
     image1.onStatusChanged: function(status) {
@@ -61,6 +60,12 @@ Page1Form {
             console.log(image1.source);
             model.onReady();
             console.log("starting timer");
+
+            closeTimer.text = 5 + '';
+            timerCurrent = 0;
+            close.visible = false;
+            closeTimer.visible = true;
+
             timer.start();
         }
     }
@@ -70,7 +75,7 @@ Page1Form {
             return;
         }
         model.onClose();
-        timer.stop();
+        timer.restart();
     }
 
     learnMore.onClicked: function() {

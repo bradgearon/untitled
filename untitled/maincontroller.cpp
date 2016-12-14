@@ -63,8 +63,6 @@ void MainController::onClose() {
 
   platformThingee->hide();
 
-  // using namespace std::chrono_literals;
-  // std::this_thread::sleep_for(5s);
   picked = picker->pick();
 
   if (pickedConnection) {
@@ -74,12 +72,17 @@ void MainController::onClose() {
   pickedConnection = QObject::connect(picked, &Score::readChanged, this,
                                       &MainController::onReadChanged);
 
-  auto element = languages->getElementByName(picked->getName());
+  element = languages->getElementByName(picked->getName());
 
   viewModel->setElement(element);
   viewModel->setScore(picked);
 
   view->setProperty("model", viewModelVariant);
+
+  using namespace std::chrono_literals;
+  std::this_thread::sleep_for(5s);
+
+  platformThingee->show();
 }
 
 void MainController::onReady() {
