@@ -32,6 +32,7 @@ public:
   void setScore(Score *value);
 
 signals:
+  void show();
   void close();
   void learnMore();
   void read(double value);

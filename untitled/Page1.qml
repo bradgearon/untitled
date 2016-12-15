@@ -14,6 +14,10 @@ Page1Form {
         repeat: true
         triggeredOnStart: false
         onTriggered: function() {
+            if(timerCurrent === 0) {
+                model.onShow();
+            }
+
             if(timerCurrent++ < timerTotal) {
                 console.log("triggered");
                 closeTimer.text = timerTotal - timerCurrent + '';

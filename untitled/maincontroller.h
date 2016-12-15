@@ -10,6 +10,8 @@
 #include "platformthingee.h"
 #include "scorethingee.h"
 
+#include "ganalytics.h"
+
 #include <QQuickItem>
 #include <QQuickWindow>
 
@@ -33,14 +35,16 @@ private:
   std::unique_ptr<LevelPicker> picker;
   std::unique_ptr<LanguageThingee> languages;
   std::unique_ptr<ScoreThingee> scores;
+  std::unique_ptr<GAnalytics> analytics;
 
 public:
   MainController(QQuickItem *parent);
-  Q_INVOKABLE void show();
   void setPlatformThingee(PlatformThingee *value);
+  void setTrackingCode(QString ga);
   void index();
 
 public slots:
+  void onShow();
   void onRead(double value);
   void onLearnMore();
   void onClose();

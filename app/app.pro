@@ -1,11 +1,16 @@
 TEMPLATE = app
-QT += qml quick quickcontrols2 sql
+QT += qml quick quickcontrols2 sql network
 android:QT+= androidextras
 
 DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += qml_debug
 
 include(../main/common.pri)
+include(../libs/qt-google-analytics/qt-google-analytics.pri)
+
+
+# ANDROID_EXTRA_LIBS += $$SSL_LIB_PATH/libssl.so \
+ # $$SSL_LIB_PATH/libcrypto.so
 
 LIBS += -L$$DESTDIR -luntitled
 LIBS += -L$$DESTDIR -lassets

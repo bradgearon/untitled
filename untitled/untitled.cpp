@@ -32,6 +32,20 @@ int untitled_init(int argc, char *argv[]) {
 
   QGuiApplication app(argc, argv);
 
+  QCommandLineParser parser;
+  auto gaName = "ga";
+  parser.addOptions({
+      {{gaName, "google-analytics"},
+       "Google analytics account (tracking code)",
+       "google analytics"},
+  });
+  parser.process(app);
+
+  QString ga = "UA-2724338-7";
+  if (parser.isSet(gaName)) {
+    ga = parser.value(gaName);
+  }
+
   QFontDatabase::addApplicationFont(":/fonts/amiko.ttf");
   QFontDatabase::addApplicationFont(":/fonts/roboto.ttf");
 
@@ -64,6 +78,7 @@ int untitled_init(int argc, char *argv[]) {
 
   mainController = new MainController(std::move(rootObject));
   mainController->setPlatformThingee(std::move(platformThingee));
+  mainController->setTrackingCode(ga);
   mainController->index();
 
   const int result = app.exec();
@@ -72,4 +87,6 @@ int untitled_init(int argc, char *argv[]) {
   return result;
 }
 
-void untitled_show() { mainController->show(); }
+void untitled_show() {
+  // show
+}

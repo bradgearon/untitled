@@ -6,6 +6,10 @@ void MainController::setPlatformThingee(PlatformThingee *value) {
   platformThingee = std::unique_ptr<PlatformThingee>(value);
 }
 
+void MainController::setTrackingCode(QString ga) {
+  analytics = std::make_unique<GAnalytics>(ga);
+}
+
 MainController::MainController(QQuickItem *parent) : QObject() {
   view = parent;
   LoaderMoboberJigger loader;
@@ -38,6 +42,9 @@ void MainController::index() {
   connect(viewModel.get(), &Form1ViewModel::read, this,
           &MainController::onRead);
 
+  connect(viewModel.get(), &Form1ViewModel::show, this,
+          &MainController::onShow);
+
   connect(viewModel.get(), &Form1ViewModel::learnMore, this,
           &MainController::onLearnMore);
 
@@ -50,6 +57,11 @@ void MainController::index() {
 
 void MainController::onRead(double value) {
   picked->setRead(value);
+
+  if (picked->getRead() == 1.0) {
+    analytics->sendEvent("word", "read", picked->getName(), picked->getRead());
+  }
+
   qDebug() << "main controller on read: " << value;
 }
 
@@ -79,10 +91,11 @@ void MainController::onClose() {
 
   view->setProperty("model", viewModelVariant);
 
+#ifdef WIN32
   using namespace std::chrono_literals;
   std::this_thread::sleep_for(5s);
-
   platformThingee->show();
+#endif
 }
 
 void MainController::onReady() {
@@ -94,10 +107,12 @@ void MainController::onReady() {
 void MainController::onReadChanged() {
   qDebug() << "main controller on read changed";
   scores->saveScores();
+  if (picked->getRead() == 0.5) {
+    analytics->sendEvent("word", "read", picked->getName(), picked->getRead());
+  }
 }
 
-void MainController::show() {
+void MainController::onShow() {
+  analytics->sendScreenView("/word/" + isoLang + "/" + picked->getName());
   qDebug() << "main controller on show";
-
-  platformThingee->show();
 }

@@ -1,18 +1,16 @@
 TEMPLATE = lib
 CONFIG -= qtc_runnable
 
-QT += quick quickcontrols2 sql
+QT += quick quickcontrols2 sql network
 android:QT+= androidextras
 
 include(../main/common.pri)
-include(../libs/qt-google-analytics/qt-google-analytics.pri)
 
 LIBS += -L$$DESTDIR -lassets
 
 DEFINES += UNTITLED_LIB
 android:RESOURCES += qml.qrc
 
-#no_include_pwd
 SOURCES += \
     levelpicker.cpp \
     level.cpp \
@@ -49,6 +47,4 @@ HEADERS += \
     androidplatformthingee.h \
     winplatformthingee.h
 
-
-# delrcc =$$system_path($$absolute_path($$RCC_DIR)/qrc_qml.*)
-# out = $$system(del /q $$delrcc)
+include(../libs/qt-google-analytics/qt-google-analytics.pri)
