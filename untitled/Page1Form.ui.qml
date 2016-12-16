@@ -1,6 +1,6 @@
-import QtQuick 2.7
-import QtQuick.Controls 2.1
-import QtQuick.Controls.Material 2.1
+import QtQuick 2.6
+import QtQuick.Controls 2.0
+import QtQuick.Controls.Material 2.0
 
 Item {
     anchors.fill: parent
@@ -32,7 +32,6 @@ Item {
             boundsBehavior: Flickable.StopAtBounds
             ScrollBar.vertical: ScrollBar {
                 width: 4
-                background.visible: false
             }
 
             TextArea {
@@ -103,7 +102,7 @@ Item {
 
     Button {
         id: learnMore
-        x: 505
+        x: 450
         z: 10
         anchors.bottom: parent.bottom
         anchors.bottomMargin: 7

@@ -1,4 +1,6 @@
 CONFIG += c++14
+CONFIG -= debug
+CONFIG += release
 
 linux: {
   PLATFORM = linux
@@ -11,7 +13,7 @@ win32: {
 }
 
 android: {
-  PLATFORM = android
+  PLATFORM = android-$${QT_ARCH}
 }
 
 MOC_DIR = ../build/$$PLATFORM/obj

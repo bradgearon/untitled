@@ -28,6 +28,7 @@ class Score;
 #include <future>
 #include <memory>
 #include <type_traits>
+#include <random>
 
 #include "book.h"
 #include "config.h"

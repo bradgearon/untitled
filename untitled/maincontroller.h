@@ -39,6 +39,7 @@ private:
 
 public:
   MainController(QQuickItem *parent);
+  ~MainController();
   void setPlatformThingee(PlatformThingee *value);
   void setTrackingCode(QString ga);
   void index();

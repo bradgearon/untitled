@@ -8,6 +8,9 @@ void MainController::setPlatformThingee(PlatformThingee *value) {
 
 void MainController::setTrackingCode(QString ga) {
   analytics = std::make_unique<GAnalytics>(ga);
+  analytics->startSession();
+  analytics->sendScreenView("/game");
+  analytics->startSending();
 }
 
 MainController::MainController(QQuickItem *parent) : QObject() {
@@ -25,6 +28,11 @@ MainController::MainController(QQuickItem *parent) : QObject() {
   isoLang = locale.name().split("_")[0];
 
   config = languages->setConfig(isoLang);
+}
+
+MainController::~MainController() {
+  analytics->endSession();
+  analytics->startSending();
 }
 
 void MainController::index() {
@@ -48,8 +56,8 @@ void MainController::index() {
   connect(viewModel.get(), &Form1ViewModel::learnMore, this,
           &MainController::onLearnMore);
 
-  pickedConnection = QObject::connect(picked, &Score::readChanged, this,
-                                      &MainController::onReadChanged);
+  pickedConnection = connect(picked, &Score::readChanged, this,
+                             &MainController::onReadChanged);
 
   viewModelVariant = QVariant::fromValue(viewModel.get());
   view->setProperty("model", viewModelVariant);
@@ -60,6 +68,7 @@ void MainController::onRead(double value) {
 
   if (picked->getRead() == 1.0) {
     analytics->sendEvent("word", "read", picked->getName(), picked->getRead());
+    analytics->startSending();
   }
 
   qDebug() << "main controller on read: " << value;
@@ -73,16 +82,19 @@ void MainController::onLearnMore() {
 void MainController::onClose() {
   qDebug() << " on close";
 
+  analytics->sendScreenView("/game");
+  analytics->startSending();
+
   platformThingee->hide();
 
   picked = picker->pick();
 
   if (pickedConnection) {
-    QObject::disconnect(pickedConnection);
+    disconnect(pickedConnection);
   }
 
-  pickedConnection = QObject::connect(picked, &Score::readChanged, this,
-                                      &MainController::onReadChanged);
+  pickedConnection = connect(picked, &Score::readChanged, this,
+                             &MainController::onReadChanged);
 
   element = languages->getElementByName(picked->getName());
 
@@ -109,10 +121,13 @@ void MainController::onReadChanged() {
   scores->saveScores();
   if (picked->getRead() == 0.5) {
     analytics->sendEvent("word", "read", picked->getName(), picked->getRead());
+    analytics->startSending();
   }
 }
 
 void MainController::onShow() {
   analytics->sendScreenView("/word/" + isoLang + "/" + picked->getName());
+  analytics->startSending();
+
   qDebug() << "main controller on show";
 }

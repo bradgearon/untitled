@@ -34,7 +34,8 @@ DISTFILES += \
     android/gradlew.bat \
     android/res/values/styles.xml \
     android/src/com/wds/untitled/UntitledNative.java \
-    android/src/com/wds/untitled/MyActivity.java
+    android/src/com/wds/untitled/MyActivity.java \
+    android/cppfudor.cmd
 
 ANDROID_PACKAGE_SOURCE_DIR = $$PWD/android
 

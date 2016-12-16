@@ -20,7 +20,7 @@ int untitled_init(int argc, char *argv[]) {
   PlatformThingee *platformThingee;
 
   QByteArray ba;
-  int n = 1;
+  auto n = 1;
   ba.setNum(n);
 
   qputenv("QML_IMPORT_TRACE", ba);
@@ -67,7 +67,7 @@ int untitled_init(int argc, char *argv[]) {
   root->setResizeMode(QQuickView::SizeRootObjectToView);
   root->setSource(QUrl(QLatin1String("qrc:/main.qml")));
 
-  QQuickItem *rootObject = root->rootObject();
+  auto rootObject = root->rootObject();
   rootObject->window()->showFullScreen();
 
 #ifdef WIN32
@@ -76,12 +76,12 @@ int untitled_init(int argc, char *argv[]) {
   root->setPosition(-1360, 340);
 #endif
 
-  mainController = new MainController(std::move(rootObject));
+  auto mainController = std::make_unique<MainController>(std::move(rootObject));
   mainController->setPlatformThingee(std::move(platformThingee));
   mainController->setTrackingCode(ga);
   mainController->index();
 
-  const int result = app.exec();
+  const auto result = app.exec();
 
   Q_CLEANUP_RESOURCE(assets);
   return result;

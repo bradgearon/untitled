@@ -49,7 +49,8 @@ QString LanguageThingee::interpolate(QString url, QString version,
 
     if (match.indexIn(part) != -1) {
       auto key = match.cap(1);
-      auto keyCStr = key.toStdString().c_str();
+      auto keyCStr = key.toUtf8();
+      qDebug() << "keyCStr: " << keyCStr << " key: " << match.cap(1);
 
       if (key == "version") {
         newUrl << version;

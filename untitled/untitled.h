@@ -5,10 +5,6 @@
 
 #include <QtCore/qcompilerdetection.h>
 
-namespace untitled {
-static MainController *mainController;
-}
-
 #if defined UNTITLED_LIB
 #define UNTITLED_COMMON_DLLSPEC Q_DECL_EXPORT
 #else
