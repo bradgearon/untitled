@@ -1,0 +1,10 @@
+{
+  "more": "Lisateave selle...",
+  "version": "est",
+  "url":"http://wol.jw.org/et/wol/b/r37/lp-st/nwt/ST/2014/:ord/:chapter#v=:verse",
+  "content":".article .v",
+  "remove": "a.b",
+  "replace":"$1 $2 $3",
+  "useIds":true,
+  "idReplace":"v\\d*-\\d*-(\\d*)-\\d*"
+}

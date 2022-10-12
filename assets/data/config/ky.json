@@ -1,0 +1,10 @@
+{
+  "more": "Көбүрөөк билүү...",
+  "version": "ky",
+  "url":"http://wol.jw.org/ky/wol/b/r51/lp-kz/bi12/KZ/2011/:ord/:chapter#v=:verse",
+  "content":".article .v",
+  "remove": "a.b",
+  "replace":"$1 $2 $3",
+  "useIds":true,
+  "idReplace":"v\\d*-\\d*-(\\d*)-\\d*"
+}

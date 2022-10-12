@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" package="com.wds.untitled" android:installLocation="auto" android:versionCode="1" android:versionName="1.0">
-    <uses-sdk android:minSdkVersion="16"/>
+    <uses-sdk android:minSdkVersion="16" android:targetSdkVersion="25"/>
 
     <application android:name="org.qtproject.qt5.android.bindings.QtApplication" android:hardwareAccelerated="true" android:theme="@style/Translucent.NoAnimation" android:label="">
         <activity android:name="com.wds.untitled.MyActivity" android:label="-- %%INSERT_APP_NAME%% --" android:launchMode="singleInstance" android:screenOrientation="sensor" android:hardwareAccelerated="true" android:configChanges="orientation|uiMode|screenLayout|screenSize|smallestScreenSize|layoutDirection|locale|fontScale|keyboard|keyboardHidden|navigation" android:theme="@style/Translucent.NoAnimation">
