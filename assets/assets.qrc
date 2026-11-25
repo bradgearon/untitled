@@ -103,8 +103,8 @@
         <file>data/word/1Jn-4-1/tncv.json</file>
         <file>data/word/1Jn-4-1/tur.json</file>
         <file>data/word/1Jn-4-1/tysiaclecia.json</file>
-        <file>data/word/1Jn-4-1/日本語.json</file>
-        <file>data/word/1Jn-4-1/한국어.json</file>
+        <file alias="data/word/1Jn-4-1/日本語.json">data/word/1Jn-4-1/ja-japanese.json</file>
+        <file alias="data/word/1Jn-4-1/한국어.json">data/word/1Jn-4-1/ko-korean.json</file>
         <file>data/word/1Jn-4-7/alb.json</file>
         <file>data/word/1Jn-4-7/b21.json</file>
         <file>data/word/1Jn-4-7/biblija.json</file>
@@ -141,8 +141,8 @@
         <file>data/word/1Jn-4-7/tncv.json</file>
         <file>data/word/1Jn-4-7/tur.json</file>
         <file>data/word/1Jn-4-7/tysiaclecia.json</file>
-        <file>data/word/1Jn-4-7/日本語.json</file>
-        <file>data/word/1Jn-4-7/한국어.json</file>
+        <file alias="data/word/1Jn-4-7/日本語.json">data/word/1Jn-4-7/ja-japanese.json</file>
+        <file alias="data/word/1Jn-4-7/한국어.json">data/word/1Jn-4-7/ko-korean.json</file>
         <file>data/word/Acts-2-1/alb.json</file>
         <file>data/word/Acts-2-1/b21.json</file>
         <file>data/word/Acts-2-1/biblija.json</file>
@@ -179,8 +179,8 @@
         <file>data/word/Acts-2-1/tncv.json</file>
         <file>data/word/Acts-2-1/tur.json</file>
         <file>data/word/Acts-2-1/tysiaclecia.json</file>
-        <file>data/word/Acts-2-1/日本語.json</file>
-        <file>data/word/Acts-2-1/한국어.json</file>
+        <file alias="data/word/Acts-2-1/日本語.json">data/word/Acts-2-1/ja-japanese.json</file>
+        <file alias="data/word/Acts-2-1/한국어.json">data/word/Acts-2-1/ko-korean.json</file>
         <file>data/word/Ex-14-10/alb.json</file>
         <file>data/word/Ex-14-10/b21.json</file>
         <file>data/word/Ex-14-10/biblija.json</file>
@@ -217,8 +217,8 @@
         <file>data/word/Ex-14-10/tur.json</file>
         <file>data/word/Ex-14-10/tysiaclecia.json</file>
         <file>data/word/Ex-14-10/wlc.json</file>
-        <file>data/word/Ex-14-10/日本語.json</file>
-        <file>data/word/Ex-14-10/한국어.json</file>
+        <file alias="data/word/Ex-14-10/日本語.json">data/word/Ex-14-10/ja-japanese.json</file>
+        <file alias="data/word/Ex-14-10/한국어.json">data/word/Ex-14-10/ko-korean.json</file>
         <file>data/word/Gen-1-1/alb.json</file>
         <file>data/word/Gen-1-1/b21.json</file>
         <file>data/word/Gen-1-1/biblija.json</file>
@@ -255,8 +255,8 @@
         <file>data/word/Gen-1-1/tur.json</file>
         <file>data/word/Gen-1-1/tysiaclecia.json</file>
         <file>data/word/Gen-1-1/wlc.json</file>
-        <file>data/word/Gen-1-1/日本語.json</file>
-        <file>data/word/Gen-1-1/한국어.json</file>
+        <file alias="data/word/Gen-1-1/日本語.json">data/word/Gen-1-1/ja-japanese.json</file>
+        <file alias="data/word/Gen-1-1/한국어.json">data/word/Gen-1-1/ko-korean.json</file>
         <file>data/word/Gen-6-9/alb.json</file>
         <file>data/word/Gen-6-9/b21.json</file>
         <file>data/word/Gen-6-9/biblija.json</file>
@@ -293,8 +293,8 @@
         <file>data/word/Gen-6-9/tur.json</file>
         <file>data/word/Gen-6-9/tysiaclecia.json</file>
         <file>data/word/Gen-6-9/wlc.json</file>
-        <file>data/word/Gen-6-9/日本語.json</file>
-        <file>data/word/Gen-6-9/한국어.json</file>
+        <file alias="data/word/Gen-6-9/日本語.json">data/word/Gen-6-9/ja-japanese.json</file>
+        <file alias="data/word/Gen-6-9/한국어.json">data/word/Gen-6-9/ko-korean.json</file>
         <file>data/word/John-10-1/alb.json</file>
         <file>data/word/John-10-1/b21.json</file>
         <file>data/word/John-10-1/biblija.json</file>
@@ -331,8 +331,8 @@
         <file>data/word/John-10-1/tncv.json</file>
         <file>data/word/John-10-1/tur.json</file>
         <file>data/word/John-10-1/tysiaclecia.json</file>
-        <file>data/word/John-10-1/日本語.json</file>
-        <file>data/word/John-10-1/한국어.json</file>
+        <file alias="data/word/John-10-1/日本語.json">data/word/John-10-1/ja-japanese.json</file>
+        <file alias="data/word/John-10-1/한국어.json">data/word/John-10-1/ko-korean.json</file>
         <file>data/word/John-14-1/alb.json</file>
         <file>data/word/John-14-1/b21.json</file>
         <file>data/word/John-14-1/biblija.json</file>
@@ -369,8 +369,8 @@
         <file>data/word/John-14-1/tncv.json</file>
         <file>data/word/John-14-1/tur.json</file>
         <file>data/word/John-14-1/tysiaclecia.json</file>
-        <file>data/word/John-14-1/日本語.json</file>
-        <file>data/word/John-14-1/한국어.json</file>
+        <file alias="data/word/John-14-1/日本語.json">data/word/John-14-1/ja-japanese.json</file>
+        <file alias="data/word/John-14-1/한국어.json">data/word/John-14-1/ko-korean.json</file>
         <file>data/word/John-14-15/alb.json</file>
         <file>data/word/John-14-15/b21.json</file>
         <file>data/word/John-14-15/biblija.json</file>
@@ -407,8 +407,8 @@
         <file>data/word/John-14-15/tncv.json</file>
         <file>data/word/John-14-15/tur.json</file>
         <file>data/word/John-14-15/tysiaclecia.json</file>
-        <file>data/word/John-14-15/日本語.json</file>
-        <file>data/word/John-14-15/한국어.json</file>
+        <file alias="data/word/John-14-15/日本語.json">data/word/John-14-15/ja-japanese.json</file>
+        <file alias="data/word/John-14-15/한국어.json">data/word/John-14-15/ko-korean.json</file>
         <file>data/word/John-15-1/alb.json</file>
         <file>data/word/John-15-1/b21.json</file>
         <file>data/word/John-15-1/biblija.json</file>
@@ -445,8 +445,8 @@
         <file>data/word/John-15-1/tncv.json</file>
         <file>data/word/John-15-1/tur.json</file>
         <file>data/word/John-15-1/tysiaclecia.json</file>
-        <file>data/word/John-15-1/日本語.json</file>
-        <file>data/word/John-15-1/한국어.json</file>
+        <file alias="data/word/John-15-1/日本語.json">data/word/John-15-1/ja-japanese.json</file>
+        <file alias="data/word/John-15-1/한국어.json">data/word/John-15-1/ko-korean.json</file>
         <file>data/word/John-3-16/alb.json</file>
         <file>data/word/John-3-16/b21.json</file>
         <file>data/word/John-3-16/biblija.json</file>
@@ -483,8 +483,8 @@
         <file>data/word/John-3-16/tncv.json</file>
         <file>data/word/John-3-16/tur.json</file>
         <file>data/word/John-3-16/tysiaclecia.json</file>
-        <file>data/word/John-3-16/日本語.json</file>
-        <file>data/word/John-3-16/한국어.json</file>
+        <file alias="data/word/John-3-16/日本語.json">data/word/John-3-16/ja-japanese.json</file>
+        <file alias="data/word/John-3-16/한국어.json">data/word/John-3-16/ko-korean.json</file>
         <file>data/word/John-6-35/alb.json</file>
         <file>data/word/John-6-35/b21.json</file>
         <file>data/word/John-6-35/biblija.json</file>
@@ -521,8 +521,8 @@
         <file>data/word/John-6-35/tncv.json</file>
         <file>data/word/John-6-35/tur.json</file>
         <file>data/word/John-6-35/tysiaclecia.json</file>
-        <file>data/word/John-6-35/日本語.json</file>
-        <file>data/word/John-6-35/한국어.json</file>
+        <file alias="data/word/John-6-35/日本語.json">data/word/John-6-35/ja-japanese.json</file>
+        <file alias="data/word/John-6-35/한국어.json">data/word/John-6-35/ko-korean.json</file>
         <file>data/word/Luk-2-8/alb.json</file>
         <file>data/word/Luk-2-8/b21.json</file>
         <file>data/word/Luk-2-8/biblija.json</file>
@@ -559,8 +559,8 @@
         <file>data/word/Luk-2-8/tncv.json</file>
         <file>data/word/Luk-2-8/tur.json</file>
         <file>data/word/Luk-2-8/tysiaclecia.json</file>
-        <file>data/word/Luk-2-8/日本語.json</file>
-        <file>data/word/Luk-2-8/한국어.json</file>
+        <file alias="data/word/Luk-2-8/日本語.json">data/word/Luk-2-8/ja-japanese.json</file>
+        <file alias="data/word/Luk-2-8/한국어.json">data/word/Luk-2-8/ko-korean.json</file>
         <file>data/word/Mat-10-26/alb.json</file>
         <file>data/word/Mat-10-26/b21.json</file>
         <file>data/word/Mat-10-26/biblija.json</file>
@@ -597,8 +597,8 @@
         <file>data/word/Mat-10-26/tncv.json</file>
         <file>data/word/Mat-10-26/tur.json</file>
         <file>data/word/Mat-10-26/tysiaclecia.json</file>
-        <file>data/word/Mat-10-26/日本語.json</file>
-        <file>data/word/Mat-10-26/한국어.json</file>
+        <file alias="data/word/Mat-10-26/日本語.json">data/word/Mat-10-26/ja-japanese.json</file>
+        <file alias="data/word/Mat-10-26/한국어.json">data/word/Mat-10-26/ko-korean.json</file>
         <file>data/word/Mat-14-14/alb.json</file>
         <file>data/word/Mat-14-14/b21.json</file>
         <file>data/word/Mat-14-14/biblija.json</file>
@@ -635,8 +635,8 @@
         <file>data/word/Mat-14-14/tncv.json</file>
         <file>data/word/Mat-14-14/tur.json</file>
         <file>data/word/Mat-14-14/tysiaclecia.json</file>
-        <file>data/word/Mat-14-14/日本語.json</file>
-        <file>data/word/Mat-14-14/한국어.json</file>
+        <file alias="data/word/Mat-14-14/日本語.json">data/word/Mat-14-14/ja-japanese.json</file>
+        <file alias="data/word/Mat-14-14/한국어.json">data/word/Mat-14-14/ko-korean.json</file>
         <file>data/word/Mat-14-22/alb.json</file>
         <file>data/word/Mat-14-22/b21.json</file>
         <file>data/word/Mat-14-22/biblija.json</file>
@@ -673,8 +673,8 @@
         <file>data/word/Mat-14-22/tncv.json</file>
         <file>data/word/Mat-14-22/tur.json</file>
         <file>data/word/Mat-14-22/tysiaclecia.json</file>
-        <file>data/word/Mat-14-22/日本語.json</file>
-        <file>data/word/Mat-14-22/한국어.json</file>
+        <file alias="data/word/Mat-14-22/日本語.json">data/word/Mat-14-22/ja-japanese.json</file>
+        <file alias="data/word/Mat-14-22/한국어.json">data/word/Mat-14-22/ko-korean.json</file>
         <file>data/word/Mat-17-1/alb.json</file>
         <file>data/word/Mat-17-1/b21.json</file>
         <file>data/word/Mat-17-1/biblija.json</file>
@@ -711,8 +711,8 @@
         <file>data/word/Mat-17-1/tncv.json</file>
         <file>data/word/Mat-17-1/tur.json</file>
         <file>data/word/Mat-17-1/tysiaclecia.json</file>
-        <file>data/word/Mat-17-1/日本語.json</file>
-        <file>data/word/Mat-17-1/한국어.json</file>
+        <file alias="data/word/Mat-17-1/日本語.json">data/word/Mat-17-1/ja-japanese.json</file>
+        <file alias="data/word/Mat-17-1/한국어.json">data/word/Mat-17-1/ko-korean.json</file>
         <file>data/word/Mat-19-13/alb.json</file>
         <file>data/word/Mat-19-13/b21.json</file>
         <file>data/word/Mat-19-13/biblija.json</file>
@@ -749,8 +749,8 @@
         <file>data/word/Mat-19-13/tncv.json</file>
         <file>data/word/Mat-19-13/tur.json</file>
         <file>data/word/Mat-19-13/tysiaclecia.json</file>
-        <file>data/word/Mat-19-13/日本語.json</file>
-        <file>data/word/Mat-19-13/한국어.json</file>
+        <file alias="data/word/Mat-19-13/日本語.json">data/word/Mat-19-13/ja-japanese.json</file>
+        <file alias="data/word/Mat-19-13/한국어.json">data/word/Mat-19-13/ko-korean.json</file>
         <file>data/word/Mat-19-16/alb.json</file>
         <file>data/word/Mat-19-16/b21.json</file>
         <file>data/word/Mat-19-16/biblija.json</file>
@@ -787,8 +787,8 @@
         <file>data/word/Mat-19-16/tncv.json</file>
         <file>data/word/Mat-19-16/tur.json</file>
         <file>data/word/Mat-19-16/tysiaclecia.json</file>
-        <file>data/word/Mat-19-16/日本語.json</file>
-        <file>data/word/Mat-19-16/한국어.json</file>
+        <file alias="data/word/Mat-19-16/日本語.json">data/word/Mat-19-16/ja-japanese.json</file>
+        <file alias="data/word/Mat-19-16/한국어.json">data/word/Mat-19-16/ko-korean.json</file>
         <file>data/word/Mat-3-13/alb.json</file>
         <file>data/word/Mat-3-13/b21.json</file>
         <file>data/word/Mat-3-13/biblija.json</file>
@@ -825,8 +825,8 @@
         <file>data/word/Mat-3-13/tncv.json</file>
         <file>data/word/Mat-3-13/tur.json</file>
         <file>data/word/Mat-3-13/tysiaclecia.json</file>
-        <file>data/word/Mat-3-13/日本語.json</file>
-        <file>data/word/Mat-3-13/한국어.json</file>
+        <file alias="data/word/Mat-3-13/日本語.json">data/word/Mat-3-13/ja-japanese.json</file>
+        <file alias="data/word/Mat-3-13/한국어.json">data/word/Mat-3-13/ko-korean.json</file>
         <file>data/word/Mat-6-19/alb.json</file>
         <file>data/word/Mat-6-19/b21.json</file>
         <file>data/word/Mat-6-19/biblija.json</file>
@@ -863,8 +863,8 @@
         <file>data/word/Mat-6-19/tncv.json</file>
         <file>data/word/Mat-6-19/tur.json</file>
         <file>data/word/Mat-6-19/tysiaclecia.json</file>
-        <file>data/word/Mat-6-19/日本語.json</file>
-        <file>data/word/Mat-6-19/한국어.json</file>
+        <file alias="data/word/Mat-6-19/日本語.json">data/word/Mat-6-19/ja-japanese.json</file>
+        <file alias="data/word/Mat-6-19/한국어.json">data/word/Mat-6-19/ko-korean.json</file>
         <file>data/word/Mat-6-25/alb.json</file>
         <file>data/word/Mat-6-25/b21.json</file>
         <file>data/word/Mat-6-25/biblija.json</file>
@@ -901,8 +901,8 @@
         <file>data/word/Mat-6-25/tncv.json</file>
         <file>data/word/Mat-6-25/tur.json</file>
         <file>data/word/Mat-6-25/tysiaclecia.json</file>
-        <file>data/word/Mat-6-25/日本語.json</file>
-        <file>data/word/Mat-6-25/한국어.json</file>
+        <file alias="data/word/Mat-6-25/日本語.json">data/word/Mat-6-25/ja-japanese.json</file>
+        <file alias="data/word/Mat-6-25/한국어.json">data/word/Mat-6-25/ko-korean.json</file>
         <file>data/word/Mat-6-5/alb.json</file>
         <file>data/word/Mat-6-5/b21.json</file>
         <file>data/word/Mat-6-5/biblija.json</file>
@@ -939,8 +939,8 @@
         <file>data/word/Mat-6-5/tncv.json</file>
         <file>data/word/Mat-6-5/tur.json</file>
         <file>data/word/Mat-6-5/tysiaclecia.json</file>
-        <file>data/word/Mat-6-5/日本語.json</file>
-        <file>data/word/Mat-6-5/한국어.json</file>
+        <file alias="data/word/Mat-6-5/日本語.json">data/word/Mat-6-5/ja-japanese.json</file>
+        <file alias="data/word/Mat-6-5/한국어.json">data/word/Mat-6-5/ko-korean.json</file>
         <file>data/word/Mk-11-20/alb.json</file>
         <file>data/word/Mk-11-20/b21.json</file>
         <file>data/word/Mk-11-20/biblija.json</file>
@@ -977,8 +977,8 @@
         <file>data/word/Mk-11-20/tncv.json</file>
         <file>data/word/Mk-11-20/tur.json</file>
         <file>data/word/Mk-11-20/tysiaclecia.json</file>
-        <file>data/word/Mk-11-20/日本語.json</file>
-        <file>data/word/Mk-11-20/한국어.json</file>
+        <file alias="data/word/Mk-11-20/日本語.json">data/word/Mk-11-20/ja-japanese.json</file>
+        <file alias="data/word/Mk-11-20/한국어.json">data/word/Mk-11-20/ko-korean.json</file>
         <file>data/word/Mk-4-35/alb.json</file>
         <file>data/word/Mk-4-35/b21.json</file>
         <file>data/word/Mk-4-35/biblija.json</file>
@@ -1015,8 +1015,8 @@
         <file>data/word/Mk-4-35/tncv.json</file>
         <file>data/word/Mk-4-35/tur.json</file>
         <file>data/word/Mk-4-35/tysiaclecia.json</file>
-        <file>data/word/Mk-4-35/日本語.json</file>
-        <file>data/word/Mk-4-35/한국어.json</file>
+        <file alias="data/word/Mk-4-35/日本語.json">data/word/Mk-4-35/ja-japanese.json</file>
+        <file alias="data/word/Mk-4-35/한국어.json">data/word/Mk-4-35/ko-korean.json</file>
         <file>data/word/Ps-107-1/alb.json</file>
         <file>data/word/Ps-107-1/b21.json</file>
         <file>data/word/Ps-107-1/biblija.json</file>
@@ -1053,8 +1053,8 @@
         <file>data/word/Ps-107-1/tur.json</file>
         <file>data/word/Ps-107-1/tysiaclecia.json</file>
         <file>data/word/Ps-107-1/wlc.json</file>
-        <file>data/word/Ps-107-1/日本語.json</file>
-        <file>data/word/Ps-107-1/한국어.json</file>
+        <file alias="data/word/Ps-107-1/日本語.json">data/word/Ps-107-1/ja-japanese.json</file>
+        <file alias="data/word/Ps-107-1/한국어.json">data/word/Ps-107-1/ko-korean.json</file>
         <file>data/word/Rom-8-31/alb.json</file>
         <file>data/word/Rom-8-31/b21.json</file>
         <file>data/word/Rom-8-31/biblija.json</file>
@@ -1091,8 +1091,8 @@
         <file>data/word/Rom-8-31/tncv.json</file>
         <file>data/word/Rom-8-31/tur.json</file>
         <file>data/word/Rom-8-31/tysiaclecia.json</file>
-        <file>data/word/Rom-8-31/日本語.json</file>
-        <file>data/word/Rom-8-31/한국어.json</file>
+        <file alias="data/word/Rom-8-31/日本語.json">data/word/Rom-8-31/ja-japanese.json</file>
+        <file alias="data/word/Rom-8-31/한국어.json">data/word/Rom-8-31/ko-korean.json</file>
         <file>data/books.json</file>
         <file>data/culture.json</file>
         <file>data/level.json</file>
