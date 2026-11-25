@@ -54,7 +54,9 @@ int untitled_init(int argc, char *argv[]) {
 
 #ifdef ANDROID
   platformThingee = new AndroidPlatformThingee();
+#ifndef UNTITLED_STANDALONE
   platformThingee->hide();
+#endif
 #endif
 #ifdef WIN32
   platformThingee = new WinPlatformThingee();
@@ -68,9 +70,18 @@ int untitled_init(int argc, char *argv[]) {
   root->setSource(QUrl(QLatin1String("qrc:/main.qml")));
 
   auto rootObject = root->rootObject();
+  if (!rootObject) {
+    qCritical() << "Failed to load main.qml";
+    return 1;
+  }
+#if defined(WIN32) && defined(UNTITLED_STANDALONE)
+  root->resize(800, 400);
+  root->show();
+#else
   rootObject->window()->showFullScreen();
+#endif
 
-#ifdef WIN32
+#if defined(WIN32) && !defined(UNTITLED_STANDALONE)
   root->setWidth(800);
   root->setHeight(400);
   root->setPosition(-1360, 340);
